@@ -70,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(left: 9),
+                  margin: EdgeInsets.only(left: 2,right: 2),
                   child: Icon(
                     Icons.keyboard_arrow_down_sharp,
                     color: ColorUtil.fromHex("#94969E"),
