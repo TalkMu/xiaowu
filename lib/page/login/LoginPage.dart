@@ -84,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
           ),
-          border: UnderlineInputBorder(
+          enabledBorder: UnderlineInputBorder(
             borderSide: BorderSide(color: ColorUtil.fromHex("#DDDEDD")),
           ),
           focusedBorder: UnderlineInputBorder(
@@ -215,6 +215,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Container(
                 margin: EdgeInsets.symmetric(vertical: 0,horizontal: 30),
                 child: new ListView(
+                  physics: NeverScrollableScrollPhysics(),
                   children: <Widget>[
                     new SizedBox(height: ScreenUtil().setHeight(96),),
                     logoSection,
@@ -224,9 +225,8 @@ class _LoginPageState extends State<LoginPage> {
                     phoneSection,
                     new SizedBox(height: ScreenUtil().setHeight(40),),
                     btnSection,
-                    new SizedBox(height: ScreenUtil().setHeight(216),),
+                    new SizedBox(height: ScreenUtil().setHeight(380),),
                     weiXinSection,
-                    new SizedBox(height: ScreenUtil().setHeight(53),),
                   ],
                 )),
               )

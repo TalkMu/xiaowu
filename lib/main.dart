@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xiaowu/page/login/CheckPage.dart';
 import 'package:xiaowu/page/login/LoginPage.dart';
 
 void main() {
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       // Scaffold 定义导航头部和页面主要内容
-      home: LoginPage(),
+      home: CheckPage(),
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
