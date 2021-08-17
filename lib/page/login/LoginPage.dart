@@ -13,6 +13,11 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextEditingController phoneController = new TextEditingController();
 
+  // 按钮是否启用
+  bool btnEnable = false;
+  // 按钮透明度
+  double btnOpacity = 0.5;
+
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil(width:750,height:1334)..init(context);
@@ -92,11 +97,22 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
         autofocus: false,
+        onChanged: (val){
+          setState(() {
+            if(this.checkPhone()){
+              this.btnEnable = true;
+              this.btnOpacity = 1.0;
+            }else{
+              this.btnEnable = false;
+              this.btnOpacity = 0.5;
+            }
+          });
+        },
       ),
     );
 
     Widget btnSection = Opacity(
-      opacity: this.checkPhone() ? 1 : 0.5,
+      opacity: btnOpacity,
       child: Container(
         margin: EdgeInsets.only(top: 39),
         width: MediaQuery.of(context).size.width,
@@ -114,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
             style: TextStyle(color: Colors.white),
           ),
           onPressed: () =>
-              this.checkPhone() ? this.getVerificationCode() : null,
+          btnEnable == true ? this.getVerificationCode() : null,
         ),
       ),
     );
