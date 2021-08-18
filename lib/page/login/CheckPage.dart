@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:xiaowu/page/tab_bar/TabBarPage.dart';
 import 'package:xiaowu/util/ColorUtil.dart';
 import 'package:flutter_verification_box/verification_box.dart';
 
@@ -66,7 +67,7 @@ class _CheckPage extends State<CheckPage> {
         showCursor: true,
         cursorColor: Colors.white,
         onSubmitted: (value) {
-          print(value);
+          this.checkCode(value);
         },
       ),
     ));
@@ -150,5 +151,12 @@ class _CheckPage extends State<CheckPage> {
         }
       });
     });
+  }
+
+  void checkCode(String code){
+    // 校验成功
+    if(true){
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>new TabBarPage()));
+    }
   }
 }
