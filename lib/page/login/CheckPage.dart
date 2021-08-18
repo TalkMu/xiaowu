@@ -89,7 +89,7 @@ class _CheckPage extends State<CheckPage> {
             child: Row(
             children: [
               Container(
-                width: 18,
+                width: 20,
                 child: Text(
                   _seconds.toString(),
                   style: TextStyle(
@@ -143,13 +143,15 @@ class _CheckPage extends State<CheckPage> {
 
   void _startTimer() {
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      setState(() {
         if (_seconds > 0) {
-          _seconds--;
+          setState(() {
+            _seconds--;
+          });
         } else if (_seconds == 0) {
-          this.available = true;
+          setState(() {
+            this.available = true;
+          });
         }
-      });
     });
   }
 
@@ -157,6 +159,13 @@ class _CheckPage extends State<CheckPage> {
     // 校验成功
     if(true){
       Navigator.push(context, MaterialPageRoute(builder: (context)=>new TabBarPage()));
+    }
+  }
+  @override
+  void dispose(){
+    super.dispose();
+    if(_timer != null){
+      _timer.cancel();
     }
   }
 }

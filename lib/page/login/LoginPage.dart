@@ -58,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
 
       child: TextField(
         controller: phoneController,
-        keyboardType: TextInputType.number,
+        keyboardType: TextInputType.phone,
         decoration: InputDecoration(
           hintText: "请输入手机号码",
           hintStyle: TextStyle(
