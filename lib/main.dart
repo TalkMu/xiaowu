@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       // Scaffold 定义导航头部和页面主要内容
-      home: CheckPage(),
+      home: LoginPage(),
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),

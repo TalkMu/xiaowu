@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:xiaowu/page/login/CheckPage.dart';
 import 'package:xiaowu/util/ColorUtil.dart';
 
 class LoginPage extends StatefulWidget {
@@ -92,6 +93,10 @@ class _LoginPageState extends State<LoginPage> {
           suffixIcon: GestureDetector(
             onTap: () {
               this.phoneController.clear();
+              setState(() {
+                this.btnEnable = false;
+                this.btnOpacity = 0.5;
+              });
             },
             child: Image.asset("assets/images/login/cha.png"),
           ),
@@ -246,9 +251,9 @@ class _LoginPageState extends State<LoginPage> {
     return true;
   }
 
-  bool getVerificationCode() {
+  void getVerificationCode() {
     print("获取验证码");
-    return true;
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>new CheckPage()));
   }
 
   bool weiXinLogin() {
