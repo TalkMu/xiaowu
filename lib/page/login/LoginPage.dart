@@ -119,6 +119,7 @@ class _LoginPageState extends State<LoginPage> {
     Widget btnSection = Opacity(
       opacity: btnOpacity,
       child: Container(
+        height: 50,
         margin: EdgeInsets.only(top: 39),
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
@@ -128,8 +129,21 @@ class _LoginPageState extends State<LoginPage> {
                 ColorUtil.fromHex("#FCA000")
               ],
             ),
-            borderRadius: BorderRadius.circular(24.5)),
+            borderRadius: BorderRadius.circular(24.5),
+        ),
         child: TextButton(
+          style: ButtonStyle(
+            //设置水波纹颜色 透明
+            overlayColor: MaterialStateProperty.all(Colors.transparent),
+            foregroundColor: MaterialStateProperty.resolveWith((states){
+              if (states.contains(MaterialState.pressed)) {
+                  //按下时的颜色
+                  setState(() {
+                    this.btnOpacity = 0.5;
+                  });
+              }
+            },)
+          ),
           child: Text(
             '获取验证码',
             style: TextStyle(color: Colors.white),
