@@ -13,21 +13,24 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   TextEditingController phoneController = new TextEditingController();
+  FocusNode focusNode = FocusNode();
 
   // 按钮是否启用
   bool btnEnable = false;
+
   // 按钮透明度
   double btnOpacity = 0.5;
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.instance = ScreenUtil(width:750,height:1334)..init(context);
-
+    ScreenUtil.instance =
+        ScreenUtil(width: 375, height: 812, allowFontScaling: true)
+          ..init(context);
     Widget logoSection = Container(
       child: Image.asset(
         "assets/images/login/logo.png",
-        width: 130,
-        height: 130,
+        width: ScreenUtil().setWidth(130),
+        height: ScreenUtil().setWidth(130),
       ),
     );
 
@@ -39,15 +42,17 @@ class _LoginPageState extends State<LoginPage> {
             child: Text(
               "手机验证码登录",
               style: TextStyle(
-                  fontSize: 24, color: ColorUtil.fromHex('#FF161833')),
+                  fontSize: ScreenUtil().setSp(24),
+                  color: ColorUtil.fromHex('#FF161833')),
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 16),
+            margin: EdgeInsets.only(top: ScreenUtil().setSp(16)),
             child: Text(
               "未注册手机可输入验证码完成注册",
               style: TextStyle(
-                  fontSize: 14, color: ColorUtil.fromHex('#FF94969E')),
+                  fontSize: ScreenUtil().setSp(14),
+                  color: ColorUtil.fromHex('#FF94969E')),
             ),
           ),
         ],
@@ -55,34 +60,44 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     Widget phoneSection = Container(
-
       child: TextField(
         controller: phoneController,
         keyboardType: TextInputType.phone,
+        focusNode: focusNode,
         decoration: InputDecoration(
           hintText: "请输入手机号码",
           hintStyle: TextStyle(
             color: ColorUtil.fromHex("#FF94969E"),
           ),
-          prefixIcon: Container(
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  child: Text(
-                    "+86",
-                    style: TextStyle(
-                        color: ColorUtil.fromHex("#161833"), fontSize: 16),
+          prefixIcon: GestureDetector(
+            onTap: () {
+              if (!focusNode.hasFocus) {
+                setState(() {
+                  focusNode.canRequestFocus = false;
+                });
+              }
+            },
+            child: Container(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    child: Text(
+                      "+86",
+                      style: TextStyle(
+                          color: ColorUtil.fromHex("#161833"),
+                          fontSize: ScreenUtil().setSp(16)),
+                    ),
                   ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 2,right: 2),
-                  child: Icon(
-                    Icons.keyboard_arrow_down_sharp,
-                    color: ColorUtil.fromHex("#94969E"),
-                  ),
-                )
-              ],
+                  Container(
+                    margin: EdgeInsets.only(left: 2, right: 2),
+                    child: Icon(
+                      Icons.keyboard_arrow_down_sharp,
+                      color: ColorUtil.fromHex("#94969E"),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
           enabledBorder: UnderlineInputBorder(
@@ -93,6 +108,9 @@ class _LoginPageState extends State<LoginPage> {
           suffixIcon: GestureDetector(
             onTap: () {
               this.phoneController.clear();
+              if (!focusNode.hasFocus) {
+                focusNode.canRequestFocus = false;
+              }
               setState(() {
                 this.btnEnable = false;
                 this.btnOpacity = 0.5;
@@ -102,12 +120,12 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
         autofocus: false,
-        onChanged: (val){
+        onChanged: (val) {
           setState(() {
-            if(this.checkPhone()){
+            if (this.checkPhone()) {
               this.btnEnable = true;
               this.btnOpacity = 1.0;
-            }else{
+            } else {
               this.btnEnable = false;
               this.btnOpacity = 0.5;
             }
@@ -119,37 +137,28 @@ class _LoginPageState extends State<LoginPage> {
     Widget btnSection = Opacity(
       opacity: btnOpacity,
       child: Container(
-        height: 50,
-        margin: EdgeInsets.only(top: 39),
+        height: ScreenUtil().setHeight(49),
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                ColorUtil.fromHex("#F76600"),
-                ColorUtil.fromHex("#FCA000")
-              ],
-            ),
-            borderRadius: BorderRadius.circular(24.5),
+          gradient: LinearGradient(
+            colors: [
+              ColorUtil.fromHex("#F76600"),
+              ColorUtil.fromHex("#FCA000")
+            ],
+          ),
+          borderRadius: BorderRadius.circular(24.5),
         ),
         child: TextButton(
           style: ButtonStyle(
             //设置水波纹颜色 透明
             overlayColor: MaterialStateProperty.all(Colors.transparent),
-            foregroundColor: MaterialStateProperty.resolveWith((states){
-              if (states.contains(MaterialState.pressed)) {
-                  //按下时的颜色
-                  setState(() {
-                    this.btnOpacity = 0.5;
-                  });
-              }
-            },)
           ),
           child: Text(
             '获取验证码',
             style: TextStyle(color: Colors.white),
           ),
           onPressed: () =>
-          btnEnable == true ? this.getVerificationCode() : null,
+              btnEnable == true ? this.getVerificationCode() : null,
         ),
       ),
     );
@@ -171,7 +180,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   child: Container(
-                    width: 50,
+                    width: ScreenUtil().setWidth(50),
                     height: 1,
                   ),
                 ),
@@ -194,7 +203,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   child: Container(
-                    width: 50,
+                    width: ScreenUtil().setWidth(50),
                     height: 1,
                   ),
                 ),
@@ -208,8 +217,8 @@ class _LoginPageState extends State<LoginPage> {
               },
               child: Image.asset(
                 "assets/images/login/weixin.png",
-                width: 32,
-                height: 32,
+                width: ScreenUtil().setWidth(32),
+                height: ScreenUtil().setHeight(32),
               ),
             ),
           ),
@@ -218,13 +227,15 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     return Scaffold(
-        body:GestureDetector(
-          behavior: HitTestBehavior.translucent,
-          onTap: () {
-            // 触摸收起键盘
-            FocusScope.of(context).requestFocus(FocusNode());
-          },
-          child: Container(
+        //可以通过设置 这个属性 防止键盘 覆盖内容 或者 键盘 撑起内容
+        resizeToAvoidBottomInset: false,
+        body: GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () {
+              // 触摸收起键盘
+              FocusScope.of(context).requestFocus(FocusNode());
+            },
+            child: Container(
               decoration: BoxDecoration(
                 image: new DecorationImage(
                   fit: BoxFit.fill,
@@ -232,25 +243,34 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               child: Container(
-                margin: EdgeInsets.symmetric(vertical: 0,horizontal: 30),
-                child: new ListView(
-                  physics: NeverScrollableScrollPhysics(),
-                  children: <Widget>[
-                    new SizedBox(height: ScreenUtil().setHeight(96),),
-                    logoSection,
-                    new SizedBox(height: ScreenUtil().setHeight(30),),
-                    labelSection,
-                    new SizedBox(height: ScreenUtil().setHeight(45),),
-                    phoneSection,
-                    new SizedBox(height: ScreenUtil().setHeight(40),),
-                    btnSection,
-                    new SizedBox(height: ScreenUtil().setHeight(380),),
-                    weiXinSection,
-                  ],
-                )),
-              )
-        )
-    );
+                  margin: EdgeInsets.symmetric(
+                      vertical: 0, horizontal: ScreenUtil().setWidth(30)),
+                  child: new ListView(
+                    physics: NeverScrollableScrollPhysics(),
+                    children: <Widget>[
+                      SizedBox(
+                        height: ScreenUtil().setHeight(96),
+                      ),
+                      logoSection,
+                      SizedBox(
+                        height: ScreenUtil().setHeight(30),
+                      ),
+                      labelSection,
+                      SizedBox(
+                        height: ScreenUtil().setHeight(45),
+                      ),
+                      phoneSection,
+                      SizedBox(
+                        height: ScreenUtil().setHeight(39),
+                      ),
+                      btnSection,
+                      SizedBox(
+                        height: ScreenUtil().setHeight(100),
+                      ),
+                      weiXinSection,
+                    ],
+                  )),
+            )));
   }
 
   /// 校验电话号码是否通过
@@ -267,7 +287,8 @@ class _LoginPageState extends State<LoginPage> {
 
   void getVerificationCode() {
     print("获取验证码");
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>new CheckPage()));
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => new CheckPage()));
   }
 
   bool weiXinLogin() {

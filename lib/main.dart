@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:xiaowu/page/login/CheckPage.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:xiaowu/page/login/LoginPage.dart';
 
 void main() {
