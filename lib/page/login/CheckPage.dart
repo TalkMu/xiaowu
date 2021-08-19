@@ -160,7 +160,7 @@ class _CheckPage extends State<CheckPage> {
   void checkCode(String code){
     // 校验成功
     if(true){
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>new TabBarPage()));
+      Navigator.pushAndRemoveUntil( context, new MaterialPageRoute(builder: (context) => new TabBarPage()),(route) => route == null,);
     }
   }
   @override

@@ -287,8 +287,11 @@ class _LoginPageState extends State<LoginPage> {
 
   void getVerificationCode() {
     print("获取验证码");
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => new CheckPage()));
+    Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
+
+      return new CheckPage();
+
+    }));
   }
 
   bool weiXinLogin() {

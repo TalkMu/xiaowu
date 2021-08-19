@@ -30,6 +30,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_screenutil: ^0.4.2
   flutter_verification_box: ^1.0.4
+  dio: ^4.0.0
+  webview_flutter: ^2.0.12
 
 dev_dependencies:
   flutter_test:

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:xiaowu/page/login/LoginPage.dart';
+import 'package:xiaowu/page/tab_bar/TabBarPage.dart';
 
 void main() {
 
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       // Scaffold 定义导航头部和页面主要内容
-      home: LoginPage(),
+      home: TabBarPage(),
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
