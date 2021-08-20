@@ -31,6 +31,7 @@ class _LoginPageState extends State<LoginPage> {
         ScreenUtil(width: 375, height: 812, allowFontScaling: true)
           ..init(context);
     Widget logoSection = Container(
+      alignment: Alignment(0,0),
       child: Image.asset(
         "assets/images/login/logo.png",
         width: ScreenUtil().setWidth(130),
@@ -249,8 +250,8 @@ class _LoginPageState extends State<LoginPage> {
               child: Container(
                   margin: EdgeInsets.symmetric(
                       vertical: 0, horizontal: ScreenUtil().setWidth(30)),
-                  child: new ListView(
-                    physics: NeverScrollableScrollPhysics(),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       SizedBox(
                         height: ScreenUtil().setHeight(96),
@@ -268,13 +269,17 @@ class _LoginPageState extends State<LoginPage> {
                         height: ScreenUtil().setHeight(39),
                       ),
                       btnSection,
-                      SizedBox(
-                        height: ScreenUtil().setHeight(100),
-                      ),
+                      Spacer(),
                       weiXinSection,
+                      SizedBox(
+                        height: ScreenUtil().setHeight(53),
+                      ),
                     ],
-                  )),
-            )));
+                  )
+              ),
+            ),
+        )
+    );
   }
 
   /// 校验电话号码是否通过

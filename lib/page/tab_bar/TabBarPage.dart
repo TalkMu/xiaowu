@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xiaowu/page/home/HomePage.dart';
@@ -8,7 +6,6 @@ import 'package:xiaowu/page/message/MessagePage.dart';
 import 'package:xiaowu/page/my/MyPage.dart';
 import 'package:xiaowu/page/robot/RobotPage.dart';
 import 'package:xiaowu/page/service/ServicePage.dart';
-import 'package:xiaowu/util/BaseUtil.dart';
 
 class TabBarPage extends StatefulWidget {
   @override
@@ -29,15 +26,12 @@ class TabBarPageState extends State<TabBarPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("TabBar"),
-      ),
       body: _pages[_currentPage],
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          setState(() {
-            this._currentPage = 2;
-          });
+          Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
+            return new RobotPage();
+          }));
         },
         child: Image.asset("assets/images/tab_bar/robot.png",
             width: 34, height: 60),
@@ -57,6 +51,7 @@ class TabBarPageState extends State<TabBarPage> {
           setState(() {
             this._currentPage = index;
           });
+
         },
         items: [
           BottomNavigationBarItem(
