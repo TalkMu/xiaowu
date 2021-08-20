@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:xiaowu/model/ApiResult.dart';
 import 'package:xiaowu/page/login/CheckPage.dart';
 import 'package:xiaowu/util/ColorUtil.dart';
+import 'package:xiaowu/util/HttpUtil.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -286,12 +290,15 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void getVerificationCode() {
-    print("获取验证码");
-    Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
-
-      return new CheckPage();
-
-    }));
+    HttpUtil.getCode({"phone":this.phoneController.text},success: (data){
+      if(data["code"] == 200){
+        Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
+          return new CheckPage();
+        }));
+      }else{
+        print("获取验证码失败");
+      }
+    },);
   }
 
   bool weiXinLogin() {

@@ -32,6 +32,7 @@ dependencies:
   flutter_verification_box: ^1.0.4
   dio: ^4.0.0
   webview_flutter: ^2.0.12
+  shared_preferences: ^2.0.6
 
 dev_dependencies:
   flutter_test:

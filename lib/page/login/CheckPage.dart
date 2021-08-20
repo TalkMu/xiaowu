@@ -3,8 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:xiaowu/page/tab_bar/TabBarPage.dart';
+import 'package:xiaowu/util/BaseUtil.dart';
 import 'package:xiaowu/util/ColorUtil.dart';
 import 'package:flutter_verification_box/verification_box.dart';
+import 'package:xiaowu/util/HttpUtil.dart';
 
 class CheckPage extends StatefulWidget {
   @override
@@ -145,28 +147,37 @@ class _CheckPage extends State<CheckPage> {
 
   void _startTimer() {
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
-        if (_seconds > 0) {
-          setState(() {
-            _seconds--;
-          });
-        } else if (_seconds == 0) {
-          setState(() {
-            this.available = true;
-          });
-        }
+      if (_seconds > 0) {
+        setState(() {
+          _seconds--;
+        });
+      } else if (_seconds == 0) {
+        setState(() {
+          this.available = true;
+        });
+      }
     });
   }
 
-  void checkCode(String code){
-    // 校验成功
-    if(true){
-      Navigator.pushAndRemoveUntil( context, new MaterialPageRoute(builder: (context) => new TabBarPage()),(route) => route == null,);
-    }
+  void checkCode(String code) {
+    // 验证码登录
+    HttpUtil.login({"phone":"","code":code},success: (data){
+      // 校验成功
+      if(data["code"]==200){
+        BaseUtil.setToken(data["data"]["token"]);
+        Navigator.pushAndRemoveUntil(
+          context,
+          new MaterialPageRoute(builder: (context) => new TabBarPage()),
+              (route) => route == null,
+        );
+      }
+    });
   }
+
   @override
-  void dispose(){
+  void dispose() {
     super.dispose();
-    if(_timer != null){
+    if (_timer != null) {
       _timer.cancel();
     }
   }

@@ -1,11 +1,14 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xiaowu/page/home/HomePage.dart';
+import 'package:xiaowu/page/login/LoginPage.dart';
 import 'package:xiaowu/page/message/MessagePage.dart';
 import 'package:xiaowu/page/my/MyPage.dart';
 import 'package:xiaowu/page/robot/RobotPage.dart';
 import 'package:xiaowu/page/service/ServicePage.dart';
+import 'package:xiaowu/util/BaseUtil.dart';
 
 class TabBarPage extends StatefulWidget {
   @override
@@ -15,7 +18,13 @@ class TabBarPage extends StatefulWidget {
 class TabBarPageState extends State<TabBarPage> {
   // 当前页面标识
   int _currentPage = 0;
-  final List<Widget> _pages = [HomePage(), ServicePage(),RobotPage(),MessagePage(),MyPage()];
+  final List<Widget> _pages = [
+    HomePage(),
+    ServicePage(),
+    RobotPage(),
+    MessagePage(),
+    MyPage()
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +39,8 @@ class TabBarPageState extends State<TabBarPage> {
             this._currentPage = 2;
           });
         },
-        child: Image.asset("assets/images/tab_bar/robot.png", width: 34, height: 60),
+        child: Image.asset("assets/images/tab_bar/robot.png",
+            width: 34, height: 60),
         backgroundColor: Colors.transparent,
         elevation: 0,
         highlightElevation: 0,
@@ -50,33 +60,40 @@ class TabBarPageState extends State<TabBarPage> {
         },
         items: [
           BottomNavigationBarItem(
-            icon: Image.asset("assets/images/tab_bar/home.png", width: 20, height: 20),
+            icon: Image.asset("assets/images/tab_bar/home.png",
+                width: 20, height: 20),
             activeIcon: Image.asset("assets/images/tab_bar/home_selected.png",
                 width: 20, height: 20),
             label: "首页",
           ),
-
           BottomNavigationBarItem(
             icon: Image.asset("assets/images/tab_bar/service.png",
                 width: 20, height: 20),
-            activeIcon: Image.asset("assets/images/tab_bar/service_selected.png",
-                width: 20, height: 20),
+            activeIcon: Image.asset(
+                "assets/images/tab_bar/service_selected.png",
+                width: 20,
+                height: 20),
             label: "服务",
           ),
           BottomNavigationBarItem(
-            icon: Image.asset("assets/images/tab_bar/robot.png", width: 20, height: 20),
+            icon: Image.asset("assets/images/tab_bar/robot.png",
+                width: 20, height: 20),
             activeIcon: Image.asset("assets/images/tab_bar/robot.png",
                 width: 20, height: 20),
             label: "",
           ),
           BottomNavigationBarItem(
-            icon: Image.asset("assets/images/tab_bar/message.png", width: 20, height: 20),
-            activeIcon: Image.asset("assets/images/tab_bar/message_selected.png",
+            icon: Image.asset("assets/images/tab_bar/message.png",
                 width: 20, height: 20),
+            activeIcon: Image.asset(
+                "assets/images/tab_bar/message_selected.png",
+                width: 20,
+                height: 20),
             label: "消息",
           ),
           BottomNavigationBarItem(
-            icon: Image.asset("assets/images/tab_bar/my.png", width: 20, height: 20),
+            icon: Image.asset("assets/images/tab_bar/my.png",
+                width: 20, height: 20),
             activeIcon: Image.asset("assets/images/tab_bar/my_selected.png",
                 width: 20, height: 20),
             label: "我的",
@@ -84,5 +101,27 @@ class TabBarPageState extends State<TabBarPage> {
         ],
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _checkLogin();
+  }
+
+  _checkLogin() async{
+    Future<SharedPreferences> preferences = SharedPreferences.getInstance();
+    final _preferences = await preferences;
+    String token = _preferences.getString("token")??'';
+    if(token == ''){
+      Navigator.pushAndRemoveUntil(
+        context,
+        new MaterialPageRoute(builder: (context) => new LoginPage()),
+            (route) => route == null,
+      );
+      print("未登录 跳转登录页面");
+    }else{
+      print("已登录 token:" + token);
+    }
   }
 }
