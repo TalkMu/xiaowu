@@ -15,7 +15,7 @@ class HttpUtil{
 
   static void login(Map<String,Object> param, {success,error}) async{
     String url = getBaseUrl("/login");
-    Response response = await Dio().get(url,queryParameters: param);
+    Response response = await Dio().post(url,queryParameters: param);
     success(response.data);
   }
 }
