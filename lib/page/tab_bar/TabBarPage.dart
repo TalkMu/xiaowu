@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xiaowu/page/home/HomePage.dart';
@@ -6,6 +7,7 @@ import 'package:xiaowu/page/message/MessagePage.dart';
 import 'package:xiaowu/page/my/MyPage.dart';
 import 'package:xiaowu/page/robot/RobotPage.dart';
 import 'package:xiaowu/page/service/ServicePage.dart';
+import 'package:xiaowu/util/BaseUtil.dart';
 
 class TabBarPage extends StatefulWidget {
   @override
@@ -104,10 +106,8 @@ class TabBarPageState extends State<TabBarPage> {
     _checkLogin();
   }
 
-  _checkLogin() async{
-    Future<SharedPreferences> preferences = SharedPreferences.getInstance();
-    final _preferences = await preferences;
-    String token = _preferences.getString("token")??'';
+  _checkLogin(){
+    String token = BaseUtil.getToken();
     if(token == ''){
       Navigator.pushAndRemoveUntil(
         context,

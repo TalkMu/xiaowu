@@ -1,10 +1,16 @@
-import 'package:flustars/flustars.dart';
+
 import 'package:flutter/material.dart';
+import 'package:sp_util/sp_util.dart';
+import 'package:xiaowu/page/login/LoginPage.dart';
 import 'package:xiaowu/page/tab_bar/TabBarPage.dart';
 
-void main() {
-  LogUtil.init(isDebug: true);
-  runApp(MyApp());
+import 'common/Global.dart';
+
+void main() async{
+  Global.init((){
+    runApp(MyApp());
+  });
+
 }
 
 class MyApp extends StatelessWidget {
