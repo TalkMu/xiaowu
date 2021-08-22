@@ -1,22 +1,32 @@
+
 import 'dart:async';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:xiaowu/page/tab_bar/TabBarPage.dart';
+import 'package:xiaowu/service/service_method.dart';
+import 'package:xiaowu/service/service_url.dart';
 import 'package:xiaowu/util/BaseUtil.dart';
 import 'package:xiaowu/util/ColorUtil.dart';
 import 'package:flutter_verification_box/verification_box.dart';
-import 'package:xiaowu/util/HttpUtil.dart';
 
 class CheckPage extends StatefulWidget {
+  String phone;
+
+  CheckPage(this.phone);
+
   @override
   State createState() {
-    return new _CheckPage();
+    return new _CheckPage(this.phone);
   }
 }
 
 class _CheckPage extends State<CheckPage> {
-  // 倒计时秒数
+  String phone;
+
+  _CheckPage(this.phone); // 倒计时
+  // 秒数
   int _seconds = 60;
 
   // 是否可以获取验证码 默认false
@@ -161,7 +171,7 @@ class _CheckPage extends State<CheckPage> {
 
   void checkCode(String code) {
     // 验证码登录
-    HttpUtil.login({"phone":"","code":code},success: (data){
+    request(servicePath["verificationCodeLogin"],data: {"userName":this.phone,"code":code},contentType: Headers.formUrlEncodedContentType).then((data){
       // 校验成功
       if(data["code"]==200){
         BaseUtil.setToken(data["data"]["token"]);

@@ -1,12 +1,12 @@
-import 'dart:convert';
+import 'package:dio/dio.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:xiaowu/model/ApiResult.dart';
 import 'package:xiaowu/page/login/CheckPage.dart';
+import 'package:xiaowu/service/service_method.dart';
+import 'package:xiaowu/service/service_url.dart';
 import 'package:xiaowu/util/ColorUtil.dart';
-import 'package:xiaowu/util/HttpUtil.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -127,7 +127,7 @@ class _LoginPageState extends State<LoginPage> {
         autofocus: false,
         onChanged: (val) {
           setState(() {
-            if (this.checkPhone()) {
+            if (this._checkPhone()) {
               this.btnEnable = true;
               this.btnOpacity = 1.0;
             } else {
@@ -163,7 +163,7 @@ class _LoginPageState extends State<LoginPage> {
             style: TextStyle(color: Colors.white),
           ),
           onPressed: () =>
-              btnEnable == true ? this.getVerificationCode() : null,
+              btnEnable == true ? this._getVerificationCode() : null,
         ),
       ),
     );
@@ -218,7 +218,7 @@ class _LoginPageState extends State<LoginPage> {
           Container(
             child: GestureDetector(
               onTap: () {
-                this.weiXinLogin();
+                this._weiXinLogin();
               },
               child: Image.asset(
                 "assets/images/login/weixin.png",
@@ -283,7 +283,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   /// 校验电话号码是否通过
-  bool checkPhone() {
+  bool _checkPhone() {
     var phone = this.phoneController.text;
     if (phone.isEmpty) {
       return false;
@@ -293,12 +293,14 @@ class _LoginPageState extends State<LoginPage> {
     }
     return true;
   }
-
-  void getVerificationCode() {
-    HttpUtil.getCode({"phone":this.phoneController.text},success: (data){
+  // 获取验证码
+  void _getVerificationCode(){
+    var phone = this.phoneController.text;
+    var param = {"phone":phone};
+    request(servicePath["getVerificationCode"],data: param,contentType: Headers.formUrlEncodedContentType).then((data){
       if(data["code"] == 200){
         Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
-          return new CheckPage();
+          return new CheckPage(phone);
         }));
       }else{
         print("获取验证码失败");
@@ -306,7 +308,7 @@ class _LoginPageState extends State<LoginPage> {
     },);
   }
 
-  bool weiXinLogin() {
+  bool _weiXinLogin() {
     print("点击微信登录");
     return true;
   }
