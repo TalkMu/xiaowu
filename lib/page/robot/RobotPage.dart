@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'dart:io';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:xiaowu/util/BaseUtil.dart';
@@ -18,8 +19,9 @@ class RobotPageState extends State<RobotPage> with AutomaticKeepAliveClientMixin
 
   @override
   void initState() {
-
+    EasyLoading.show(status: '加载中...');
     super.initState();
+    if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
   }
 
   _progressBar(double progress, BuildContext context) {
@@ -55,7 +57,6 @@ class RobotPageState extends State<RobotPage> with AutomaticKeepAliveClientMixin
         child: WebView(
           // 要显示的url
           initialUrl: "http://xiaowudev.sdfykjyxgs.cn:7778/#/?token="+BaseUtil.getToken(),
-//        initialUrl: "https://baidu.com",
           // JS执行模式 默认是不调用
           javascriptMode: JavascriptMode.unrestricted,
           // WebView创建完成时调用
@@ -64,10 +65,10 @@ class RobotPageState extends State<RobotPage> with AutomaticKeepAliveClientMixin
           },
           // 加载进度
           onProgress: (progress) {
-            print("进度：$progress");
             setState(() {
               lineProgress = double.parse((progress / 100).toString());
             });
+            //EasyLoading.showProgress(lineProgress, status: "$progress%");
           },
           // 拦截请求
           navigationDelegate: (NavigationRequest request) {
@@ -76,7 +77,9 @@ class RobotPageState extends State<RobotPage> with AutomaticKeepAliveClientMixin
           // 页面开始加载
           onPageStarted: (String url) {},
           // 页面加载完成
-          onPageFinished: (String url) {},
+          onPageFinished: (String url) {
+            EasyLoading.dismiss();
+          },
         ),
       )
     );

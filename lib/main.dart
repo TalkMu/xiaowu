@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:sp_util/sp_util.dart';
 import 'package:xiaowu/page/login/LoginPage.dart';
 import 'package:xiaowu/page/tab_bar/TabBarPage.dart';
@@ -10,7 +11,6 @@ void main() async{
   Global.init((){
     runApp(MyApp());
   });
-
 }
 
 class MyApp extends StatelessWidget {
@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
+      builder: EasyLoading.init(),
     );
   }
 }

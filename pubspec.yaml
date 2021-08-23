@@ -33,6 +33,7 @@ dependencies:
   dio: ^4.0.0
   webview_flutter: ^2.0.12
   flustars: ^2.0.1
+  flutter_easyloading: ^3.0.0
 
 dev_dependencies:
   flutter_test:
