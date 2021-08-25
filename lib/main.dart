@@ -1,8 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:sp_util/sp_util.dart';
-import 'package:xiaowu/page/login/LoginPage.dart';
 import 'package:xiaowu/page/tab_bar/TabBarPage.dart';
 
 import 'common/Global.dart';

@@ -1,23 +1,30 @@
 
 
 import 'package:sp_util/sp_util.dart';
+import 'package:xiaowu/common/Constants.dart';
+import 'package:xiaowu/model/User.dart';
 
 class BaseUtil{
-  /// 检测是否登录
-  static Future<bool> checkLogin() async{
-    String token = getToken();
-    if(token == ''){
-      return false;
-    }
-    return true;
-  }
 
-  static void setToken(String token){
-    SpUtil.putString("token", token);
+  static User? getLoginUser(){
+    var obj = SpUtil.getObject(Constants.LOGIN_DATA_KEY);
+    if(obj == null){
+      return null;
+    }
+    var user = User.fromJson(obj);
+    return user;
   }
 
   static String getToken(){
-    String token = SpUtil.getString("token",defValue: "")??"";
-    return token;
+    var user = getLoginUser();
+    if(user == null){
+      return "";
+    }
+    return user.token;
+  }
+
+  static bool checkLogin(){
+    var user = getLoginUser();
+    return (user != null);
   }
 }

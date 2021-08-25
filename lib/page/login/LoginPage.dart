@@ -1,9 +1,12 @@
 import 'package:dio/dio.dart';
+import 'package:flustars/flustars.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:xiaowu/common/Constants.dart';
+import 'package:xiaowu/model/User.dart';
 import 'package:xiaowu/page/login/CheckPage.dart';
+import 'package:xiaowu/page/tab_bar/TabBarPage.dart';
 import 'package:xiaowu/service/service_method.dart';
 import 'package:xiaowu/service/service_url.dart';
 import 'package:xiaowu/util/ColorUtil.dart';
@@ -27,15 +30,13 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.instance =
-        ScreenUtil(width: 375, height: 812, allowFontScaling: true)
-          ..init(context);
+    //ScreenUtil.instance = ScreenUtil(width: 375, height: 812, allowFontScaling: true)..init(context);
     Widget logoSection = Container(
       alignment: Alignment(0,0),
       child: Image.asset(
         "assets/images/login/logo.png",
-        width: ScreenUtil().setWidth(130),
-        height: ScreenUtil().setWidth(130),
+        width: ScreenUtil.getInstance().getAdapterSize(130),
+        height: ScreenUtil.getInstance().getAdapterSize(130),
       ),
     );
 
@@ -47,16 +48,16 @@ class _LoginPageState extends State<LoginPage> {
             child: Text(
               "手机验证码登录",
               style: TextStyle(
-                  fontSize: ScreenUtil().setSp(24),
+                  fontSize: ScreenUtil.getInstance().getAdapterSize(24),
                   color: ColorUtil.fromHex('#FF161833')),
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: ScreenUtil().setSp(16)),
+            margin: EdgeInsets.only(top: ScreenUtil.getInstance().getAdapterSize(16)),
             child: Text(
               "未注册手机可输入验证码完成注册",
               style: TextStyle(
-                  fontSize: ScreenUtil().setSp(14),
+                  fontSize: ScreenUtil.getInstance().getAdapterSize(14),
                   color: ColorUtil.fromHex('#FF94969E')),
             ),
           ),
@@ -91,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                       "+86",
                       style: TextStyle(
                           color: ColorUtil.fromHex("#161833"),
-                          fontSize: ScreenUtil().setSp(16)),
+                          fontSize: ScreenUtil.getInstance().getAdapterSize(16)),
                     ),
                   ),
                   Container(
@@ -142,7 +143,7 @@ class _LoginPageState extends State<LoginPage> {
     Widget btnSection = Opacity(
       opacity: btnOpacity,
       child: Container(
-        height: ScreenUtil().setHeight(49),
+        height: ScreenUtil.getInstance().getAdapterSize(49),
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -185,7 +186,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   child: Container(
-                    width: ScreenUtil().setWidth(50),
+                    width: ScreenUtil.getInstance().getAdapterSize(50),
                     height: 1,
                   ),
                 ),
@@ -208,7 +209,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   child: Container(
-                    width: ScreenUtil().setWidth(50),
+                    width: ScreenUtil.getInstance().getAdapterSize(50),
                     height: 1,
                   ),
                 ),
@@ -222,8 +223,8 @@ class _LoginPageState extends State<LoginPage> {
               },
               child: Image.asset(
                 "assets/images/login/weixin.png",
-                width: ScreenUtil().setWidth(32),
-                height: ScreenUtil().setHeight(32),
+                width: ScreenUtil.getInstance().getAdapterSize(32),
+                height: ScreenUtil.getInstance().getAdapterSize(32),
               ),
             ),
           ),
@@ -249,30 +250,30 @@ class _LoginPageState extends State<LoginPage> {
               ),
               child: Container(
                   margin: EdgeInsets.symmetric(
-                      vertical: 0, horizontal: ScreenUtil().setWidth(30)),
+                      vertical: 0, horizontal: ScreenUtil.getInstance().getAdapterSize(30)),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       SizedBox(
-                        height: ScreenUtil().setHeight(96),
+                        height: ScreenUtil.getInstance().getAdapterSize(96),
                       ),
                       logoSection,
                       SizedBox(
-                        height: ScreenUtil().setHeight(30),
+                        height: ScreenUtil.getInstance().getAdapterSize(30),
                       ),
                       labelSection,
                       SizedBox(
-                        height: ScreenUtil().setHeight(45),
+                        height: ScreenUtil.getInstance().getAdapterSize(45),
                       ),
                       phoneSection,
                       SizedBox(
-                        height: ScreenUtil().setHeight(39),
+                        height: ScreenUtil.getInstance().getAdapterSize(39),
                       ),
                       btnSection,
                       Spacer(),
                       weiXinSection,
                       SizedBox(
-                        height: ScreenUtil().setHeight(53),
+                        height: ScreenUtil.getInstance().getAdapterSize(53),
                       ),
                     ],
                   )
@@ -309,7 +310,23 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   bool _weiXinLogin() {
+    checkCode("18108099936","6666");
     print("点击微信登录");
     return true;
+  }
+  void checkCode(String phone,String code) {
+    // 验证码登录
+    request(servicePath["verificationCodeLogin"],data: {"userName":phone,"code":code},contentType: Headers.formUrlEncodedContentType).then((data){
+      // 校验成功
+      if(data["code"]==200){
+        var user = User.fromJson(data["data"]);
+        SpUtil.putObject(Constants.LOGIN_DATA_KEY, user);
+        Navigator.pushAndRemoveUntil(
+          context,
+          new MaterialPageRoute(builder: (context) => new TabBarPage()),
+              (route) => route == null,
+        );
+      }
+    });
   }
 }

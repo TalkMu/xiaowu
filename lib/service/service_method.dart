@@ -5,7 +5,6 @@ import 'package:dio/dio.dart';
 /// 公用请求方法
 Future request(url, {params,data,method="POST",contentType=Headers.jsonContentType}) async{
   //LogUtil.v("URL：$url Method:$method Params:$params Data:$data");
-  Dio dio = new Dio();
   Options options = Options(
     contentType: contentType,
     method: method,

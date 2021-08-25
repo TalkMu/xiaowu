@@ -28,16 +28,19 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  flutter_screenutil: ^0.4.2
   flutter_verification_box: ^1.0.4
   dio: ^4.0.0
   webview_flutter: ^2.0.12
   flustars: ^2.0.1
   flutter_easyloading: ^3.0.0
+  location: ^4.2.0
+  amap_location: ^0.2.0
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -54,6 +57,7 @@ flutter:
   assets:
     - assets/images/tab_bar/
     - assets/images/login/
+    - assets/images/bg/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

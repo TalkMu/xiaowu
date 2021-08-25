@@ -1,5 +1,5 @@
+import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xiaowu/page/login/LoginPage.dart';
 import 'package:xiaowu/util/ColorUtil.dart';
@@ -15,14 +15,10 @@ class MyPageState extends State<MyPage>{
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.instance =
-    ScreenUtil(width: 375, height: 812, allowFontScaling: true)
-      ..init(context);
-
     Widget quitBtnSection = Opacity(
       opacity: 1,
       child: Container(
-        height: ScreenUtil().setHeight(49),
+        height: ScreenUtil.getInstance().getAdapterSize(49),
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           gradient: LinearGradient(

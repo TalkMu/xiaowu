@@ -2,8 +2,10 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
+import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:xiaowu/common/Constants.dart';
+import 'package:xiaowu/model/User.dart';
 import 'package:xiaowu/page/tab_bar/TabBarPage.dart';
 import 'package:xiaowu/service/service_method.dart';
 import 'package:xiaowu/service/service_url.dart';
@@ -38,7 +40,6 @@ class _CheckPage extends State<CheckPage> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.instance = ScreenUtil(width: 750, height: 1334)..init(context);
     if (!hasStartTimer) {
       this.hasStartTimer = true;
       this._startTimer();
@@ -67,10 +68,10 @@ class _CheckPage extends State<CheckPage> {
     );
     Widget codeSection = Container(
         child: Container(
-      height: 45,
+      height: ScreenUtil.getInstance().getAdapterSize(45),
       child: VerificationBox(
         count: 4,
-        textStyle: TextStyle(color: ColorUtil.fromHex("#FFFFFF"), fontSize: 24),
+        textStyle: TextStyle(color: ColorUtil.fromHex("#FFFFFF"), fontSize: ScreenUtil.getInstance().getAdapterSize(24)),
         decoration: BoxDecoration(
             color: ColorUtil.fromHex("#F76C00"),
             borderRadius: BorderRadius.circular(5)),
@@ -79,7 +80,7 @@ class _CheckPage extends State<CheckPage> {
         showCursor: true,
         cursorColor: Colors.white,
         onSubmitted: (value) {
-          this.checkCode(value);
+          this.checkCode(this.phone,value);
         },
       ),
     ));
@@ -101,7 +102,7 @@ class _CheckPage extends State<CheckPage> {
             child: Row(
             children: [
               Container(
-                width: 20,
+                width: ScreenUtil.getInstance().getAdapterSize(20),
                 child: Text(
                   _seconds.toString(),
                   style: TextStyle(
@@ -132,20 +133,20 @@ class _CheckPage extends State<CheckPage> {
           ),
         ),
         child: Container(
-          margin: EdgeInsets.symmetric(vertical: 0, horizontal: 30),
+          margin: EdgeInsets.symmetric(vertical: 0, horizontal: ScreenUtil.getInstance().getAdapterSize(30)),
           child: new ListView(
             physics: NeverScrollableScrollPhysics(),
             children: [
               new SizedBox(
-                height: ScreenUtil().setHeight(184),
+                height: ScreenUtil.getInstance().getAdapterSize(184),
               ),
               labelSection,
               new SizedBox(
-                height: ScreenUtil().setHeight(37),
+                height: ScreenUtil.getInstance().getAdapterSize(37),
               ),
               codeSection,
               new SizedBox(
-                height: ScreenUtil().setHeight(16),
+                height: ScreenUtil.getInstance().getAdapterSize(16),
               ),
               countDownSection
             ],
@@ -169,12 +170,13 @@ class _CheckPage extends State<CheckPage> {
     });
   }
 
-  void checkCode(String code) {
+  void checkCode(String phone,String code) {
     // 验证码登录
-    request(servicePath["verificationCodeLogin"],data: {"userName":this.phone,"code":code},contentType: Headers.formUrlEncodedContentType).then((data){
+    request(servicePath["verificationCodeLogin"],data: {"userName":phone,"code":code},contentType: Headers.formUrlEncodedContentType).then((data){
       // 校验成功
       if(data["code"]==200){
-        BaseUtil.setToken(data["data"]["token"]);
+        var user = User.fromJson(data["data"]);
+        SpUtil.putObject(Constants.LOGIN_DATA_KEY, user);
         Navigator.pushAndRemoveUntil(
           context,
           new MaterialPageRoute(builder: (context) => new TabBarPage()),
