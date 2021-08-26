@@ -12,7 +12,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String bgUrl = "";
+  WeatherEnum weatherEnum = WeatherEnum.rain;
+  String bigWeatherIcon = "assets/images/weather/big_";
+  String curBackGround = "assets/images/bg/";
   String? location;
   AMapLocation? _loc;
 
@@ -26,15 +28,202 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    weatherEnum = WeatherEnum.cloudy;
     _initLocation();
     super.initState();
-    bgUrl = getWeatherBg(WeatherEnum.snow);
+    setState(() {
+      bigWeatherIcon += getWeatherUrl(weatherEnum);
+    });
+    setState(() {
+      curBackGround += getWeatherUrl(weatherEnum);
+    });
     LogUtil.d("HomePage initState");
   }
 
   @override
   Widget build(BuildContext context) {
-    LogUtil.d("HomePage build");
+    var weatherLabelSection = Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  child: Row(
+                    children: [
+                      Container(
+                        child: Image.asset(bigWeatherIcon,
+                            width: ScreenUtil.getInstance().getWidth(44),
+                            height: ScreenUtil.getInstance().getWidth(44)),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(
+                            left: ScreenUtil.getInstance().getAdapterSize(8)),
+                        child: Text(
+                          "35°c",
+                          style: TextStyle(
+                              fontSize:
+                                  ScreenUtil.getInstance().getAdapterSize(32),
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(
+                            left: ScreenUtil.getInstance().getAdapterSize(8)),
+                        child: Text(
+                          "晴/pm 2.5",
+                          style: TextStyle(
+                            fontSize:
+                                ScreenUtil.getInstance().getAdapterSize(18),
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  margin: EdgeInsets.only(left: ScreenUtil.getInstance().getWidth(7)),
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                      top: ScreenUtil.getInstance().getHeight(6)),
+                  child: Text(
+                    "6月29日 农历三月初八 星期三",
+                    style: TextStyle(
+                      fontSize: ScreenUtil.getInstance().getSp(14),
+                      color: Colors.white,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            margin:
+                EdgeInsets.only(left: ScreenUtil.getInstance().getWidth(62),top: ScreenUtil.getInstance().getHeight(17)),
+            child: Column(
+              children: [
+                Container(
+                  child: Text(
+                    "武侯区",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: ScreenUtil.getInstance().getAdapterSize(16),
+                        fontWeight: FontWeight.w400),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                      top: ScreenUtil.getInstance().getHeight(5)),
+                  child: Image.asset("assets/images/home/location.png",width: ScreenUtil.getInstance().getWidth(18),height: ScreenUtil.getInstance().getWidth(18),),
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+    var weatherTabSection = Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            child: Column(
+              children: [
+                Container(
+                  child: Image.asset("assets/images/weather/cloudy.png",width: ScreenUtil.getInstance().getWidth(24),height: ScreenUtil.getInstance().getHeight(24),),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: ScreenUtil.getInstance().getAdapterSize(7)),
+                  child: Text("星期四",style: TextStyle(
+                      fontSize: ScreenUtil.getInstance().getAdapterSize(14),
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white
+                  ),),
+                )
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(left: ScreenUtil.getInstance().getAdapterSize(27)),
+            child: Column(
+              children: [
+                Container(
+                  child: Image.asset("assets/images/weather/sunny.png",width: ScreenUtil.getInstance().getWidth(24),height: ScreenUtil.getInstance().getHeight(24),),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: ScreenUtil.getInstance().getAdapterSize(7)),
+                  child: Text("星期五",style: TextStyle(
+                      fontSize: ScreenUtil.getInstance().getAdapterSize(14),
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white
+                  ),),
+                )
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(left: ScreenUtil.getInstance().getAdapterSize(27)),
+            child: Column(
+              children: [
+                Container(
+                  child: Image.asset("assets/images/weather/overcast.png",width: ScreenUtil.getInstance().getWidth(24),height: ScreenUtil.getInstance().getHeight(24),),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: ScreenUtil.getInstance().getAdapterSize(7)),
+                  child: Text("星期六",style: TextStyle(
+                      fontSize: ScreenUtil.getInstance().getAdapterSize(14),
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white
+                  ),),
+                )
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(left: ScreenUtil.getInstance().getAdapterSize(27)),
+            child: Column(
+              children: [
+                Container(
+                  child: Image.asset("assets/images/weather/rain.png",width: ScreenUtil.getInstance().getWidth(24),height: ScreenUtil.getInstance().getHeight(24),),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: ScreenUtil.getInstance().getAdapterSize(7)),
+                  child: Text("星期天",style: TextStyle(
+                      fontSize: ScreenUtil.getInstance().getAdapterSize(14),
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white
+                  ),),
+                )
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(left: ScreenUtil.getInstance().getAdapterSize(27)),
+            child: Column(
+              children: [
+                Container(
+                  child: Image.asset("assets/images/weather/fog.png",width: ScreenUtil.getInstance().getWidth(24),height: ScreenUtil.getInstance().getHeight(24),),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: ScreenUtil.getInstance().getAdapterSize(7)),
+                  child: Text("星期一",style: TextStyle(
+                      fontSize: ScreenUtil.getInstance().getAdapterSize(14),
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white
+                  ),),
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -44,17 +233,23 @@ class _HomePageState extends State<HomePage> {
               fit: BoxFit.cover,
               // 图片位置
               alignment: Alignment.topCenter,
-              image: AssetImage(bgUrl),
+              image: AssetImage(curBackGround),
               // 图片平铺方式
               repeat: ImageRepeat.repeatY),
         ),
         child: Container(
           alignment: Alignment.center,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(_loc != null? (_loc!.latitude.toString() + "---" + _loc!.longitude.toString()):"btn"),
-              Text(location != null? location.toString():"暂无")
+              SizedBox(
+                height: ScreenUtil.getInstance().getAdapterSize(54),
+              ),
+              weatherLabelSection,
+              SizedBox(
+                height: ScreenUtil.getInstance().getAdapterSize(16),
+              ),
+              weatherTabSection,
             ],
           ),
         ),
@@ -62,29 +257,29 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  String getWeatherBg(WeatherEnum weatherEnum) {
+  String getWeatherUrl(WeatherEnum weatherEnum) {
     String name = "";
     switch (weatherEnum) {
       case WeatherEnum.overcast:
-        name = "overcast";
+        name = "overcast.png";
         break;
       case WeatherEnum.snow:
-        name = "snow";
+        name = "snow.png";
         break;
       case WeatherEnum.rain:
-        name = "rain";
+        name = "rain.png";
         break;
       case WeatherEnum.sunny:
-        name = "sunny";
+        name = "sunny.png";
         break;
       case WeatherEnum.cloudy:
-        name = "cloudy";
+        name = "cloudy.png";
         break;
       case WeatherEnum.fog:
-        name = "fog";
+        name = "fog.png";
         break;
     }
-    return "assets/images/bg/" + name + ".png";
+    return name;
   }
 
   //初始化定位监听，
