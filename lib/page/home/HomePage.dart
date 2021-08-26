@@ -86,7 +86,8 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ],
                   ),
-                  margin: EdgeInsets.only(left: ScreenUtil.getInstance().getWidth(7)),
+                  margin: EdgeInsets.only(
+                      left: ScreenUtil.getInstance().getWidth(7)),
                 ),
                 Container(
                   margin: EdgeInsets.only(
@@ -104,8 +105,9 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Container(
-            margin:
-                EdgeInsets.only(left: ScreenUtil.getInstance().getWidth(62),top: ScreenUtil.getInstance().getHeight(17)),
+            margin: EdgeInsets.only(
+                left: ScreenUtil.getInstance().getWidth(62),
+                top: ScreenUtil.getInstance().getHeight(17)),
             child: Column(
               children: [
                 Container(
@@ -120,7 +122,11 @@ class _HomePageState extends State<HomePage> {
                 Container(
                   margin: EdgeInsets.only(
                       top: ScreenUtil.getInstance().getHeight(5)),
-                  child: Image.asset("assets/images/home/location.png",width: ScreenUtil.getInstance().getWidth(18),height: ScreenUtil.getInstance().getWidth(18),),
+                  child: Image.asset(
+                    "assets/images/home/location.png",
+                    width: ScreenUtil.getInstance().getWidth(18),
+                    height: ScreenUtil.getInstance().getWidth(18),
+                  ),
                 )
               ],
             ),
@@ -136,87 +142,126 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               children: [
                 Container(
-                  child: Image.asset("assets/images/weather/cloudy.png",width: ScreenUtil.getInstance().getWidth(24),height: ScreenUtil.getInstance().getHeight(24),),
+                  child: Image.asset(
+                    "assets/images/weather/cloudy.png",
+                    width: ScreenUtil.getInstance().getWidth(24),
+                    height: ScreenUtil.getInstance().getHeight(24),
+                  ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: ScreenUtil.getInstance().getAdapterSize(7)),
-                  child: Text("星期四",style: TextStyle(
-                      fontSize: ScreenUtil.getInstance().getAdapterSize(14),
-                      fontWeight: FontWeight.w400,
-                      color: Colors.white
-                  ),),
+                  margin: EdgeInsets.only(
+                      top: ScreenUtil.getInstance().getAdapterSize(7)),
+                  child: Text(
+                    "星期四",
+                    style: TextStyle(
+                        fontSize: ScreenUtil.getInstance().getAdapterSize(14),
+                        fontWeight: FontWeight.w400,
+                        color: Colors.white),
+                  ),
                 )
               ],
             ),
           ),
           Container(
-            margin: EdgeInsets.only(left: ScreenUtil.getInstance().getAdapterSize(27)),
+            margin: EdgeInsets.only(
+                left: ScreenUtil.getInstance().getAdapterSize(27)),
             child: Column(
               children: [
                 Container(
-                  child: Image.asset("assets/images/weather/sunny.png",width: ScreenUtil.getInstance().getWidth(24),height: ScreenUtil.getInstance().getHeight(24),),
+                  child: Image.asset(
+                    "assets/images/weather/sunny.png",
+                    width: ScreenUtil.getInstance().getWidth(24),
+                    height: ScreenUtil.getInstance().getHeight(24),
+                  ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: ScreenUtil.getInstance().getAdapterSize(7)),
-                  child: Text("星期五",style: TextStyle(
-                      fontSize: ScreenUtil.getInstance().getAdapterSize(14),
-                      fontWeight: FontWeight.w400,
-                      color: Colors.white
-                  ),),
+                  margin: EdgeInsets.only(
+                      top: ScreenUtil.getInstance().getAdapterSize(7)),
+                  child: Text(
+                    "星期五",
+                    style: TextStyle(
+                        fontSize: ScreenUtil.getInstance().getAdapterSize(14),
+                        fontWeight: FontWeight.w400,
+                        color: Colors.white),
+                  ),
                 )
               ],
             ),
           ),
           Container(
-            margin: EdgeInsets.only(left: ScreenUtil.getInstance().getAdapterSize(27)),
+            margin: EdgeInsets.only(
+                left: ScreenUtil.getInstance().getAdapterSize(27)),
             child: Column(
               children: [
                 Container(
-                  child: Image.asset("assets/images/weather/overcast.png",width: ScreenUtil.getInstance().getWidth(24),height: ScreenUtil.getInstance().getHeight(24),),
+                  child: Image.asset(
+                    "assets/images/weather/overcast.png",
+                    width: ScreenUtil.getInstance().getWidth(24),
+                    height: ScreenUtil.getInstance().getHeight(24),
+                  ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: ScreenUtil.getInstance().getAdapterSize(7)),
-                  child: Text("星期六",style: TextStyle(
-                      fontSize: ScreenUtil.getInstance().getAdapterSize(14),
-                      fontWeight: FontWeight.w400,
-                      color: Colors.white
-                  ),),
+                  margin: EdgeInsets.only(
+                      top: ScreenUtil.getInstance().getAdapterSize(7)),
+                  child: Text(
+                    "星期六",
+                    style: TextStyle(
+                        fontSize: ScreenUtil.getInstance().getAdapterSize(14),
+                        fontWeight: FontWeight.w400,
+                        color: Colors.white),
+                  ),
                 )
               ],
             ),
           ),
           Container(
-            margin: EdgeInsets.only(left: ScreenUtil.getInstance().getAdapterSize(27)),
+            margin: EdgeInsets.only(
+                left: ScreenUtil.getInstance().getAdapterSize(27)),
             child: Column(
               children: [
                 Container(
-                  child: Image.asset("assets/images/weather/rain.png",width: ScreenUtil.getInstance().getWidth(24),height: ScreenUtil.getInstance().getHeight(24),),
+                  child: Image.asset(
+                    "assets/images/weather/rain.png",
+                    width: ScreenUtil.getInstance().getWidth(24),
+                    height: ScreenUtil.getInstance().getHeight(24),
+                  ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: ScreenUtil.getInstance().getAdapterSize(7)),
-                  child: Text("星期天",style: TextStyle(
-                      fontSize: ScreenUtil.getInstance().getAdapterSize(14),
-                      fontWeight: FontWeight.w400,
-                      color: Colors.white
-                  ),),
+                  margin: EdgeInsets.only(
+                      top: ScreenUtil.getInstance().getAdapterSize(7)),
+                  child: Text(
+                    "星期天",
+                    style: TextStyle(
+                        fontSize: ScreenUtil.getInstance().getAdapterSize(14),
+                        fontWeight: FontWeight.w400,
+                        color: Colors.white),
+                  ),
                 )
               ],
             ),
           ),
           Container(
-            margin: EdgeInsets.only(left: ScreenUtil.getInstance().getAdapterSize(27)),
+            margin: EdgeInsets.only(
+                left: ScreenUtil.getInstance().getAdapterSize(27)),
             child: Column(
               children: [
                 Container(
-                  child: Image.asset("assets/images/weather/fog.png",width: ScreenUtil.getInstance().getWidth(24),height: ScreenUtil.getInstance().getHeight(24),),
+                  child: Image.asset(
+                    "assets/images/weather/fog.png",
+                    width: ScreenUtil.getInstance().getWidth(24),
+                    height: ScreenUtil.getInstance().getHeight(24),
+                  ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: ScreenUtil.getInstance().getAdapterSize(7)),
-                  child: Text("星期一",style: TextStyle(
-                      fontSize: ScreenUtil.getInstance().getAdapterSize(14),
-                      fontWeight: FontWeight.w400,
-                      color: Colors.white
-                  ),),
+                  margin: EdgeInsets.only(
+                      top: ScreenUtil.getInstance().getAdapterSize(7)),
+                  child: Text(
+                    "星期一",
+                    style: TextStyle(
+                        fontSize: ScreenUtil.getInstance().getAdapterSize(14),
+                        fontWeight: FontWeight.w400,
+                        color: Colors.white),
+                  ),
                 )
               ],
             ),
@@ -238,21 +283,22 @@ class _HomePageState extends State<HomePage> {
               repeat: ImageRepeat.repeatY),
         ),
         child: Container(
-          alignment: Alignment.center,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: ScreenUtil.getInstance().getAdapterSize(54),
-              ),
-              weatherLabelSection,
-              SizedBox(
-                height: ScreenUtil.getInstance().getAdapterSize(16),
-              ),
-              weatherTabSection,
-            ],
-          ),
-        ),
+            alignment: Alignment.center,
+            child: MediaQuery.removePadding(
+                context: context,
+                removeTop: true,
+                child: ListView(
+                  children: [
+                    SizedBox(
+                      height: ScreenUtil.getInstance().getAdapterSize(54),
+                    ),
+                    weatherLabelSection,
+                    SizedBox(
+                      height: ScreenUtil.getInstance().getAdapterSize(16),
+                    ),
+                    weatherTabSection,
+                  ],
+                ))),
       ),
     );
   }

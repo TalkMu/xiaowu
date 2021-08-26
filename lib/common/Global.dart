@@ -25,6 +25,9 @@ class Global {
       SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
       AMapLocationClient.setApiKey("f4efb49f71bd9738557bc7ab2da4df31");
     }
+    if(Platform.isIOS){
+      AMapLocationClient.setApiKey("2a9beb114f94221ddde171cde65227c2");
+    }
   }
 
   static void configLoading() {
