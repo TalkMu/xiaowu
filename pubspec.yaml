@@ -31,10 +31,12 @@ dependencies:
   flutter_verification_box: ^1.0.4
   dio: ^4.0.0
   webview_flutter: ^2.0.12
-  flustars: ^2.0.1
+  flustars: ^0.3.3
   flutter_easyloading: ^3.0.0
-  location: ^4.2.0
-  amap_location: ^0.2.0
+  flutter_baidu_mapapi_map: ^2.0.1
+  flutter_baidu_mapapi_search: ^2.0.1
+  flutter_baidu_mapapi_utils: ^2.0.1
+  flutter_bmflocation: ^1.0.2
 
 
 dev_dependencies:

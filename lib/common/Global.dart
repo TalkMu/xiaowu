@@ -1,14 +1,15 @@
 import 'dart:io';
 
-import 'package:amap_location/amap_location.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bmflocation/bdmap_location_flutter_plugin.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:sp_util/sp_util.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class Global {
+
   //初始化全局信息
   static Future init(VoidCallback callback) async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -18,15 +19,12 @@ class Global {
     setDesignWHD(375, 812, density: 3);
     //configLoading();
     callback();
-
     if (Platform.isAndroid) {
       // 以下两行 设置android状态栏为透明的沉浸。写在组件渲染之后，是为了在渲染后进行set赋值，覆盖状态栏，写在渲染之前MaterialApp组件会覆盖掉这个值。
       SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(statusBarColor: Colors.transparent);
       SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
-      AMapLocationClient.setApiKey("f4efb49f71bd9738557bc7ab2da4df31");
     }
     if(Platform.isIOS){
-      AMapLocationClient.setApiKey("2a9beb114f94221ddde171cde65227c2");
     }
   }
 
