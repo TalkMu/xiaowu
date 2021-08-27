@@ -3,6 +3,7 @@ import 'package:flustars/flustars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:xiaowu/common/WeatherEnum.dart';
+import 'package:xiaowu/model/WeatherModel.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -29,14 +30,15 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     weatherEnum = WeatherEnum.cloudy;
-    _initLocation();
-    super.initState();
     setState(() {
       bigWeatherIcon += getWeatherUrl(weatherEnum);
     });
     setState(() {
       curBackGround += getWeatherUrl(weatherEnum);
     });
+    _initLocation();
+    super.initState();
+
     LogUtil.d("HomePage initState");
   }
 
@@ -135,140 +137,134 @@ class _HomePageState extends State<HomePage> {
       ),
     );
     var weatherTabSection = Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            child: Column(
-              children: [
-                Container(
-                  child: Image.asset(
-                    "assets/images/weather/cloudy.png",
-                    width: ScreenUtil.getInstance().getWidth(24),
-                    height: ScreenUtil.getInstance().getHeight(24),
-                  ),
+        child: GridView.count(
+      crossAxisCount: 5,
+      childAspectRatio: 1.0,
+      mainAxisSpacing: ScreenUtil.getInstance().getWidth(27),
+      shrinkWrap: true,
+      children: [
+        Container(
+          child: Column(
+            children: [
+              Container(
+                child: Image.asset(
+                  "assets/images/weather/sunny.png",
+                  width: ScreenUtil.getInstance().getWidth(24),
+                  height: ScreenUtil.getInstance().getHeight(24),
                 ),
-                Container(
-                  margin: EdgeInsets.only(
-                      top: ScreenUtil.getInstance().getAdapterSize(7)),
-                  child: Text(
-                    "星期四",
-                    style: TextStyle(
-                        fontSize: ScreenUtil.getInstance().getAdapterSize(14),
-                        fontWeight: FontWeight.w400,
-                        color: Colors.white),
-                  ),
-                )
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(
-                left: ScreenUtil.getInstance().getAdapterSize(27)),
-            child: Column(
-              children: [
-                Container(
-                  child: Image.asset(
-                    "assets/images/weather/sunny.png",
-                    width: ScreenUtil.getInstance().getWidth(24),
-                    height: ScreenUtil.getInstance().getHeight(24),
-                  ),
+              ),
+              Container(
+                margin: EdgeInsets.only(
+                    top: ScreenUtil.getInstance().getAdapterSize(7)),
+                child: Text(
+                  "星期五",
+                  style: TextStyle(
+                      fontSize: ScreenUtil.getInstance().getAdapterSize(14),
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white),
                 ),
-                Container(
-                  margin: EdgeInsets.only(
-                      top: ScreenUtil.getInstance().getAdapterSize(7)),
-                  child: Text(
-                    "星期五",
-                    style: TextStyle(
-                        fontSize: ScreenUtil.getInstance().getAdapterSize(14),
-                        fontWeight: FontWeight.w400,
-                        color: Colors.white),
-                  ),
-                )
-              ],
-            ),
+              )
+            ],
           ),
-          Container(
-            margin: EdgeInsets.only(
-                left: ScreenUtil.getInstance().getAdapterSize(27)),
-            child: Column(
-              children: [
-                Container(
-                  child: Image.asset(
-                    "assets/images/weather/overcast.png",
-                    width: ScreenUtil.getInstance().getWidth(24),
-                    height: ScreenUtil.getInstance().getHeight(24),
-                  ),
+        ),
+        Container(
+          child: Column(
+            children: [
+              Container(
+                child: Image.asset(
+                  "assets/images/weather/sunny.png",
+                  width: ScreenUtil.getInstance().getWidth(24),
+                  height: ScreenUtil.getInstance().getHeight(24),
                 ),
-                Container(
-                  margin: EdgeInsets.only(
-                      top: ScreenUtil.getInstance().getAdapterSize(7)),
-                  child: Text(
-                    "星期六",
-                    style: TextStyle(
-                        fontSize: ScreenUtil.getInstance().getAdapterSize(14),
-                        fontWeight: FontWeight.w400,
-                        color: Colors.white),
-                  ),
-                )
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(
-                left: ScreenUtil.getInstance().getAdapterSize(27)),
-            child: Column(
-              children: [
-                Container(
-                  child: Image.asset(
-                    "assets/images/weather/rain.png",
-                    width: ScreenUtil.getInstance().getWidth(24),
-                    height: ScreenUtil.getInstance().getHeight(24),
-                  ),
+              ),
+              Container(
+                margin: EdgeInsets.only(
+                    top: ScreenUtil.getInstance().getAdapterSize(7)),
+                child: Text(
+                  "星期五",
+                  style: TextStyle(
+                      fontSize: ScreenUtil.getInstance().getAdapterSize(14),
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white),
                 ),
-                Container(
-                  margin: EdgeInsets.only(
-                      top: ScreenUtil.getInstance().getAdapterSize(7)),
-                  child: Text(
-                    "星期天",
-                    style: TextStyle(
-                        fontSize: ScreenUtil.getInstance().getAdapterSize(14),
-                        fontWeight: FontWeight.w400,
-                        color: Colors.white),
-                  ),
-                )
-              ],
-            ),
+              )
+            ],
           ),
-          Container(
-            margin: EdgeInsets.only(
-                left: ScreenUtil.getInstance().getAdapterSize(27)),
-            child: Column(
-              children: [
-                Container(
-                  child: Image.asset(
-                    "assets/images/weather/fog.png",
-                    width: ScreenUtil.getInstance().getWidth(24),
-                    height: ScreenUtil.getInstance().getHeight(24),
-                  ),
+        ),
+        Container(
+          child: Column(
+            children: [
+              Container(
+                child: Image.asset(
+                  "assets/images/weather/sunny.png",
+                  width: ScreenUtil.getInstance().getWidth(24),
+                  height: ScreenUtil.getInstance().getHeight(24),
                 ),
-                Container(
-                  margin: EdgeInsets.only(
-                      top: ScreenUtil.getInstance().getAdapterSize(7)),
-                  child: Text(
-                    "星期一",
-                    style: TextStyle(
-                        fontSize: ScreenUtil.getInstance().getAdapterSize(14),
-                        fontWeight: FontWeight.w400,
-                        color: Colors.white),
-                  ),
-                )
-              ],
-            ),
+              ),
+              Container(
+                margin: EdgeInsets.only(
+                    top: ScreenUtil.getInstance().getAdapterSize(7)),
+                child: Text(
+                  "星期五",
+                  style: TextStyle(
+                      fontSize: ScreenUtil.getInstance().getAdapterSize(14),
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white),
+                ),
+              )
+            ],
           ),
-        ],
-      ),
-    );
+        ),
+        Container(
+          child: Column(
+            children: [
+              Container(
+                child: Image.asset(
+                  "assets/images/weather/sunny.png",
+                  width: ScreenUtil.getInstance().getWidth(24),
+                  height: ScreenUtil.getInstance().getHeight(24),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(
+                    top: ScreenUtil.getInstance().getAdapterSize(7)),
+                child: Text(
+                  "星期五",
+                  style: TextStyle(
+                      fontSize: ScreenUtil.getInstance().getAdapterSize(14),
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white),
+                ),
+              )
+            ],
+          ),
+        ),
+        Container(
+          child: Column(
+            children: [
+              Container(
+                child: Image.asset(
+                  "assets/images/weather/sunny.png",
+                  width: ScreenUtil.getInstance().getWidth(24),
+                  height: ScreenUtil.getInstance().getHeight(24),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(
+                    top: ScreenUtil.getInstance().getAdapterSize(7)),
+                child: Text(
+                  "星期五",
+                  style: TextStyle(
+                      fontSize: ScreenUtil.getInstance().getAdapterSize(14),
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white),
+                ),
+              )
+            ],
+          ),
+        ),
+      ],
+    ));
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -359,5 +355,266 @@ class _HomePageState extends State<HomePage> {
     } else {
       return "定位失败: \n错误:{code=${loc.code},description=${loc.description}";
     }
+  }
+}
+
+class WeatherSection extends StatefulWidget {
+  @override
+  State createState() {
+    return new _WeatherSectionState();
+  }
+}
+
+class _WeatherSectionState extends State<WeatherSection> {
+  HomeWeather data;
+
+  _WeatherSectionState(this.data);
+
+  String bigWeatherIcon = "assets/images/weather/big_";
+  String curBackGround = "assets/images/bg/";
+
+  @override
+  Widget build(BuildContext context) {
+    Widget weatherLabelSection = Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  child: Row(
+                    children: [
+                      Container(
+                        child: Image.asset(bigWeatherIcon,
+                            width: ScreenUtil.getInstance().getWidth(44),
+                            height:
+                            ScreenUtil.getInstance().getWidth(44)),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(
+                            left: ScreenUtil.getInstance()
+                                .getAdapterSize(8)),
+                        child: Text(
+                          "35°c",
+                          style: TextStyle(
+                              fontSize: ScreenUtil.getInstance()
+                                  .getAdapterSize(32),
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(
+                            left: ScreenUtil.getInstance()
+                                .getAdapterSize(8)),
+                        child: Text(
+                          "晴/pm 2.5",
+                          style: TextStyle(
+                            fontSize: ScreenUtil.getInstance()
+                                .getAdapterSize(18),
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  margin: EdgeInsets.only(
+                      left: ScreenUtil.getInstance().getWidth(7)),
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                      top: ScreenUtil.getInstance().getHeight(6)),
+                  child: Text(
+                    "6月29日 农历三月初八 星期三",
+                    style: TextStyle(
+                      fontSize: ScreenUtil.getInstance().getSp(14),
+                      color: Colors.white,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(
+                left: ScreenUtil.getInstance().getWidth(62),
+                top: ScreenUtil.getInstance().getHeight(17)),
+            child: Column(
+              children: [
+                Container(
+                  child: Text(
+                    "武侯区",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize:
+                        ScreenUtil.getInstance().getAdapterSize(16),
+                        fontWeight: FontWeight.w400),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                      top: ScreenUtil.getInstance().getHeight(5)),
+                  child: Image.asset(
+                    "assets/images/home/location.png",
+                    width: ScreenUtil.getInstance().getWidth(18),
+                    height: ScreenUtil.getInstance().getWidth(18),
+                  ),
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+    Widget weatherTabSection = Container(
+        child: GridView.count(
+          crossAxisCount: 5,
+          childAspectRatio: 1.0,
+          mainAxisSpacing: ScreenUtil.getInstance().getWidth(27),
+          shrinkWrap: true,
+          children: [
+            Container(
+              child: Column(
+                children: [
+                  Container(
+                    child: Image.asset(
+                      "assets/images/weather/sunny.png",
+                      width: ScreenUtil.getInstance().getWidth(24),
+                      height: ScreenUtil.getInstance().getHeight(24),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(
+                        top: ScreenUtil.getInstance().getAdapterSize(7)),
+                    child: Text(
+                      "星期五",
+                      style: TextStyle(
+                          fontSize:
+                          ScreenUtil.getInstance().getAdapterSize(14),
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Container(
+              child: Column(
+                children: [
+                  Container(
+                    child: Image.asset(
+                      "assets/images/weather/sunny.png",
+                      width: ScreenUtil.getInstance().getWidth(24),
+                      height: ScreenUtil.getInstance().getHeight(24),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(
+                        top: ScreenUtil.getInstance().getAdapterSize(7)),
+                    child: Text(
+                      "星期五",
+                      style: TextStyle(
+                          fontSize:
+                          ScreenUtil.getInstance().getAdapterSize(14),
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Container(
+              child: Column(
+                children: [
+                  Container(
+                    child: Image.asset(
+                      "assets/images/weather/sunny.png",
+                      width: ScreenUtil.getInstance().getWidth(24),
+                      height: ScreenUtil.getInstance().getHeight(24),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(
+                        top: ScreenUtil.getInstance().getAdapterSize(7)),
+                    child: Text(
+                      "星期五",
+                      style: TextStyle(
+                          fontSize:
+                          ScreenUtil.getInstance().getAdapterSize(14),
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Container(
+              child: Column(
+                children: [
+                  Container(
+                    child: Image.asset(
+                      "assets/images/weather/sunny.png",
+                      width: ScreenUtil.getInstance().getWidth(24),
+                      height: ScreenUtil.getInstance().getHeight(24),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(
+                        top: ScreenUtil.getInstance().getAdapterSize(7)),
+                    child: Text(
+                      "星期五",
+                      style: TextStyle(
+                          fontSize:
+                          ScreenUtil.getInstance().getAdapterSize(14),
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Container(
+              child: Column(
+                children: [
+                  Container(
+                    child: Image.asset(
+                      "assets/images/weather/sunny.png",
+                      width: ScreenUtil.getInstance().getWidth(24),
+                      height: ScreenUtil.getInstance().getHeight(24),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(
+                        top: ScreenUtil.getInstance().getAdapterSize(7)),
+                    child: Text(
+                      "星期五",
+                      style: TextStyle(
+                          fontSize:
+                          ScreenUtil.getInstance().getAdapterSize(14),
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ],
+        ));
+    return Container(
+      child: Column(
+        children: [
+          weatherLabelSection,
+          SizedBox(
+            height: ScreenUtil.getInstance().getAdapterSize(16),
+          ),
+          weatherTabSection
+        ],
+      ),
+    );
   }
 }
