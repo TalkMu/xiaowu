@@ -1,3 +1,5 @@
+import 'package:xiaowu/util/BaseUtil.dart';
+
 const serviceUrl = 'http://xiaowudev.sdfykjyxgs.cn:8080/';
 
 const headers = {
@@ -17,4 +19,5 @@ const servicePath = {
   // 获取验证码
   "getVerificationCode": serviceUrl + "sendLoginVerificationCode",
   "verificationCodeLogin": serviceUrl + "verificationCodeLogin",
+  "home": serviceUrl + "biz/index/home",
 };

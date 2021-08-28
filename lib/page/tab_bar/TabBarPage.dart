@@ -1,4 +1,4 @@
-
+import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xiaowu/page/home/HomePage.dart';
@@ -28,7 +28,10 @@ class TabBarPageState extends State<TabBarPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[_currentPage],
+      body: IndexedStack(
+        index: _currentPage,
+        children: _pages,
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
@@ -36,7 +39,8 @@ class TabBarPageState extends State<TabBarPage> {
           }));
         },
         child: Image.asset("assets/images/tab_bar/robot.png",
-            width: 34, height: 60),
+            width: ScreenUtil.getInstance().getWidth(34),
+            height: ScreenUtil.getInstance().getHeight(60)),
         backgroundColor: Colors.transparent,
         elevation: 0,
         highlightElevation: 0,
@@ -53,46 +57,53 @@ class TabBarPageState extends State<TabBarPage> {
           setState(() {
             this._currentPage = index;
           });
-
         },
         items: [
           BottomNavigationBarItem(
             icon: Image.asset("assets/images/tab_bar/home.png",
-                width: 20, height: 20),
+                width: ScreenUtil.getInstance().getWidth(20),
+                height: ScreenUtil.getInstance().getHeight(20)),
             activeIcon: Image.asset("assets/images/tab_bar/home_selected.png",
-                width: 20, height: 20),
+                width: ScreenUtil.getInstance().getWidth(20),
+                height: ScreenUtil.getInstance().getHeight(20)),
             label: "首页",
           ),
           BottomNavigationBarItem(
             icon: Image.asset("assets/images/tab_bar/service.png",
-                width: 20, height: 20),
+                width: ScreenUtil.getInstance().getWidth(20),
+                height: ScreenUtil.getInstance().getHeight(20)),
             activeIcon: Image.asset(
                 "assets/images/tab_bar/service_selected.png",
-                width: 20,
-                height: 20),
+                width: ScreenUtil.getInstance().getWidth(20),
+                height: ScreenUtil.getInstance().getHeight(20)),
             label: "服务",
           ),
           BottomNavigationBarItem(
             icon: Image.asset("assets/images/tab_bar/robot.png",
-                width: 20, height: 20),
+                width: ScreenUtil.getInstance().getWidth(20),
+                height: ScreenUtil.getInstance().getHeight(20)),
             activeIcon: Image.asset("assets/images/tab_bar/robot.png",
-                width: 20, height: 20),
+                width: ScreenUtil.getInstance().getWidth(20),
+                height: ScreenUtil.getInstance().getHeight(20)),
             label: "",
           ),
           BottomNavigationBarItem(
             icon: Image.asset("assets/images/tab_bar/message.png",
-                width: 20, height: 20),
+                width: ScreenUtil.getInstance().getWidth(20),
+                height: ScreenUtil.getInstance().getHeight(20)),
             activeIcon: Image.asset(
                 "assets/images/tab_bar/message_selected.png",
-                width: 20,
-                height: 20),
+                width: ScreenUtil.getInstance().getWidth(20),
+                height: ScreenUtil.getInstance().getHeight(20)),
             label: "消息",
           ),
           BottomNavigationBarItem(
             icon: Image.asset("assets/images/tab_bar/my.png",
-                width: 20, height: 20),
+                width: ScreenUtil.getInstance().getWidth(20),
+                height: ScreenUtil.getInstance().getHeight(20)),
             activeIcon: Image.asset("assets/images/tab_bar/my_selected.png",
-                width: 20, height: 20),
+                width: ScreenUtil.getInstance().getWidth(20),
+                height: ScreenUtil.getInstance().getHeight(20)),
             label: "我的",
           ),
         ],
@@ -106,16 +117,16 @@ class TabBarPageState extends State<TabBarPage> {
     //_checkLogin();
   }
 
-  _checkLogin(){
+  _checkLogin() {
     String token = BaseUtil.getToken();
-    if(token == ''){
+    if (token == '') {
       Navigator.pushAndRemoveUntil(
         context,
         new MaterialPageRoute(builder: (context) => new LoginPage()),
-            (route) => route == null,
+        (route) => route == null,
       );
       print("未登录 跳转登录页面");
-    }else{
+    } else {
       print("已登录 token:" + token);
     }
   }

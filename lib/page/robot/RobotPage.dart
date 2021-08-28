@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'dart:io';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:xiaowu/page/login/LoginPage.dart';
 import 'package:xiaowu/util/BaseUtil.dart';
 
 class RobotPage extends StatefulWidget {
@@ -19,11 +20,19 @@ class RobotPageState extends State<RobotPage> with AutomaticKeepAliveClientMixin
 
   @override
   void initState() {
+    _validateLogin();
     EasyLoading.show(status: '加载中...');
     super.initState();
     if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
-  }
 
+  }
+  void _validateLogin(){
+    if(!BaseUtil.checkLogin()){
+      Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
+        return new LoginPage();
+      }));
+    }
+  }
   _progressBar(double progress, BuildContext context) {
     return Container(
       child: LinearProgressIndicator(
