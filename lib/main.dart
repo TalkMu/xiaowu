@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       title: "小五管家Plus",
       debugShowCheckedModeBanner: false,
       // Scaffold 定义导航头部和页面主要内容
-      home: LoginPage(),
+      home: TabBarPage(),
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),

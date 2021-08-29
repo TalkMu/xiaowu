@@ -7,9 +7,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_baidu_mapapi_search/flutter_baidu_mapapi_search.dart';
 import 'package:lunar_calendar/lunar_calendar.dart';
+import 'package:xiaowu/entity/banner_entity.dart';
 import 'package:xiaowu/entity/category_entity.dart';
 import 'package:xiaowu/entity/weather_entity.dart';
 import 'package:xiaowu/model/WeatherModel.dart';
+import 'package:xiaowu/page/home/BannerSection.dart';
 import 'package:xiaowu/page/login/LoginPage.dart';
 import 'package:xiaowu/service/service_method.dart';
 import 'package:xiaowu/service/service_url.dart';
@@ -46,14 +48,6 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     print("initState");
-    if (!BaseUtil.checkLogin()) {
-      Navigator.pushAndRemoveUntil(
-        context,
-        new MaterialPageRoute(builder: (context) => new LoginPage()),
-        (route) => route == null,
-      );
-      return;
-    }
     var location = BaseUtil.getLocation();
     if (location != null && location.address != null) {
       setState(() {
@@ -124,6 +118,11 @@ class _HomePageState extends State<HomePage>
                 CategorySection((homeData["serviceVOList"] as List)
                     .map((e) => CategoryEntity().fromJson(e))
                     .toList()),
+                SizedBox(
+                  height: ScreenUtil.getInstance().getHeight(12),
+                ),
+                BannerSection((homeData["banners"] as List).map((e) =>
+                    BannerEntity().fromJson(e)).toList()),
                 TextButton(
                     onPressed: () {
                       _getHomeData();

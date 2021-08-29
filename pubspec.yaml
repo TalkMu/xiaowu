@@ -29,6 +29,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   flutter_verification_box: ^1.0.4
+  flutter_swiper: ^1.1.6
   dio: ^4.0.0
   webview_flutter: ^2.0.12
   flustars: ^0.3.3
@@ -38,6 +39,7 @@ dependencies:
   flutter_baidu_mapapi_utils: ^2.0.1
   flutter_bmflocation: ^1.0.2
   lunar_calendar: ^1.0.1
+
 
 
 dev_dependencies:

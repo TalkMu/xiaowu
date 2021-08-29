@@ -114,7 +114,7 @@ class TabBarPageState extends State<TabBarPage> {
   @override
   void initState() {
     super.initState();
-    //_checkLogin();
+    _checkLogin();
   }
 
   _checkLogin() {
