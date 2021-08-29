@@ -31,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     Widget logoSection = Container(
-      alignment: Alignment(0,0),
+      alignment: Alignment(0, 0),
       child: Image.asset(
         "assets/images/login/logo.png",
         width: ScreenUtil.getInstance().getAdapterSize(130),
@@ -52,7 +52,8 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: ScreenUtil.getInstance().getHeight(16)),
+            margin:
+                EdgeInsets.only(top: ScreenUtil.getInstance().getHeight(16)),
             child: Text(
               "未注册手机可输入验证码完成注册",
               style: TextStyle(
@@ -190,7 +191,8 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(left: ScreenUtil.getInstance().getWidth(10)),
+                  margin: EdgeInsets.only(
+                      left: ScreenUtil.getInstance().getWidth(10)),
                   child: Text(
                     "使用第三方登录",
                     style: TextStyle(
@@ -198,7 +200,8 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(left: ScreenUtil.getInstance().getWidth(10)),
+                  margin: EdgeInsets.only(
+                      left: ScreenUtil.getInstance().getWidth(10)),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
@@ -235,51 +238,50 @@ class _LoginPageState extends State<LoginPage> {
         //可以通过设置 这个属性 防止键盘 覆盖内容 或者 键盘 撑起内容
         resizeToAvoidBottomInset: false,
         body: GestureDetector(
-            behavior: HitTestBehavior.translucent,
-            onTap: () {
-              // 触摸收起键盘
-              FocusScope.of(context).requestFocus(FocusNode());
-            },
-            child: Container(
-              decoration: BoxDecoration(
-                image: new DecorationImage(
-                  fit: BoxFit.fill,
-                  image: AssetImage("assets/images/login/bg.png"),
-                ),
-              ),
-              child: Container(
-                  margin: EdgeInsets.symmetric(
-                      vertical: 0, horizontal: ScreenUtil.getInstance().getAdapterSize(30)),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      SizedBox(
-                        height: ScreenUtil.getInstance().getHeight(96),
-                      ),
-                      logoSection,
-                      SizedBox(
-                        height: ScreenUtil.getInstance().getHeight(30),
-                      ),
-                      labelSection,
-                      SizedBox(
-                        height: ScreenUtil.getInstance().getHeight(45),
-                      ),
-                      phoneSection,
-                      SizedBox(
-                        height: ScreenUtil.getInstance().getHeight(39),
-                      ),
-                      btnSection,
-                      Spacer(),
-                      weiXinSection,
-                      SizedBox(
-                        height: ScreenUtil.getInstance().getHeight(53),
-                      ),
-                    ],
-                  )
+          behavior: HitTestBehavior.translucent,
+          onTap: () {
+            // 触摸收起键盘
+            FocusScope.of(context).requestFocus(FocusNode());
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              image: new DecorationImage(
+                fit: BoxFit.fill,
+                image: AssetImage("assets/images/login/bg.png"),
               ),
             ),
-        )
-    );
+            child: Container(
+                margin: EdgeInsets.symmetric(
+                    vertical: 0,
+                    horizontal: ScreenUtil.getInstance().getAdapterSize(30)),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(
+                      height: ScreenUtil.getInstance().getHeight(96),
+                    ),
+                    logoSection,
+                    SizedBox(
+                      height: ScreenUtil.getInstance().getHeight(30),
+                    ),
+                    labelSection,
+                    SizedBox(
+                      height: ScreenUtil.getInstance().getHeight(45),
+                    ),
+                    phoneSection,
+                    SizedBox(
+                      height: ScreenUtil.getInstance().getHeight(39),
+                    ),
+                    btnSection,
+                    Spacer(),
+                    weiXinSection,
+                    SizedBox(
+                      height: ScreenUtil.getInstance().getHeight(53),
+                    ),
+                  ],
+                )),
+          ),
+        ));
   }
 
   /// 校验电话号码是否通过
@@ -293,38 +295,41 @@ class _LoginPageState extends State<LoginPage> {
     }
     return true;
   }
+
   // 获取验证码
-  void _getVerificationCode(){
+  void _getVerificationCode() {
     var phone = this.phoneController.text;
-    var param = {"phone":phone};
-    request(servicePath["getVerificationCode"],data: param,contentType: Headers.formUrlEncodedContentType).then((data){
-      if(data["code"] == 200){
-        Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
-          return new CheckPage(phone);
-        }));
-      }else{
-        print("获取验证码失败");
-      }
-    },);
+    var param = {"phone": phone};
+    request(servicePath["getVerificationCode"],
+            data: param, contentType: Headers.formUrlEncodedContentType)
+        .then(
+      (data) {
+        if (data["code"] == 200) {
+          Navigator.of(context).pushNamed("loginCheck", arguments:
+          {"phone":phone});
+        } else {
+          print("获取验证码失败");
+        }
+      },
+    );
   }
 
-  bool _weiXinLogin() {
-    checkCode("18108099936","6666");
+  void _weiXinLogin() {
+    checkCode("18108099936", "6666");
     print("点击微信登录");
-    return true;
   }
-  void checkCode(String phone,String code) {
+
+  void checkCode(String phone, String code) {
     // 验证码登录
-    request(servicePath["verificationCodeLogin"],data: {"userName":phone,"code":code},contentType: Headers.formUrlEncodedContentType).then((data){
+    request(servicePath["verificationCodeLogin"],
+            data: {"userName": phone, "code": code},
+            contentType: Headers.formUrlEncodedContentType)
+        .then((data) {
       // 校验成功
-      if(data["code"]==200){
+      if (data["code"] == 200) {
         var user = UserEntity().fromJson(data["data"]);
         SpUtil.putObject(Constants.LOGIN_DATA_KEY, user);
-        Navigator.pushAndRemoveUntil(
-          context,
-          new MaterialPageRoute(builder: (context) => new TabBarPage()),
-              (route) => route == null,
-        );
+        Navigator.pushNamed(context, "/");
       }
     });
   }

@@ -20,15 +20,12 @@ class _BannerSectionState extends State<BannerSection> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        //border: Border.all(color: Colors.red)
-      ),
       margin: EdgeInsets.only(left: 28,right: 28),
       height: ScreenUtil.getInstance().getHeight(118),
       child: Swiper(
         itemCount: list.length,
         itemBuilder: (context,index){
-          return Image.network(list[index].url,);
+          return Image.network(list[index].url,fit: BoxFit.fitWidth,);
         },
         pagination: SwiperPagination(
           //margin: EdgeInsets.only(bottom: 0)

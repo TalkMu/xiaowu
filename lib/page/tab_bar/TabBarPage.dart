@@ -1,5 +1,6 @@
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xiaowu/page/home/HomePage.dart';
 import 'package:xiaowu/page/login/LoginPage.dart';
@@ -17,6 +18,7 @@ class TabBarPage extends StatefulWidget {
 class TabBarPageState extends State<TabBarPage> {
   // 当前页面标识
   int _currentPage = 0;
+  bool loginState = false;
   final List<Widget> _pages = [
     HomePage(),
     ServicePage(),
@@ -27,6 +29,9 @@ class TabBarPageState extends State<TabBarPage> {
 
   @override
   Widget build(BuildContext context) {
+    if(!loginState){
+      return LoginPage();
+    }
     return Scaffold(
       body: IndexedStack(
         index: _currentPage,
@@ -117,16 +122,13 @@ class TabBarPageState extends State<TabBarPage> {
     _checkLogin();
   }
 
-  _checkLogin() {
+  Future _checkLogin() async{
     String token = BaseUtil.getToken();
     if (token == '') {
-      Navigator.pushAndRemoveUntil(
-        context,
-        new MaterialPageRoute(builder: (context) => new LoginPage()),
-        (route) => route == null,
-      );
+      loginState = false;
       print("未登录 跳转登录页面");
     } else {
+      loginState =true;
       print("已登录 token:" + token);
     }
   }
