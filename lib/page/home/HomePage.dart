@@ -12,6 +12,7 @@ import 'package:xiaowu/entity/category_entity.dart';
 import 'package:xiaowu/entity/weather_entity.dart';
 import 'package:xiaowu/model/WeatherModel.dart';
 import 'package:xiaowu/page/home/BannerSection.dart';
+import 'package:xiaowu/page/home/RemindSection.dart';
 import 'package:xiaowu/page/login/LoginPage.dart';
 import 'package:xiaowu/service/service_method.dart';
 import 'package:xiaowu/service/service_url.dart';
@@ -123,6 +124,10 @@ class _HomePageState extends State<HomePage>
                 ),
                 BannerSection((homeData["banners"] as List).map((e) =>
                     BannerEntity().fromJson(e)).toList()),
+                SizedBox(
+                  height: ScreenUtil.getInstance().getHeight(14),
+                ),
+                RemindSection(),
                 TextButton(
                     onPressed: () {
                       _getHomeData();
