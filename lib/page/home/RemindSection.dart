@@ -77,9 +77,7 @@ class _RemindSectionState extends State<RemindSection> {
               ],
             ),
           ),
-          Container(
-            child: ListView(),
-          ),
+          Container(),
         ],
       ),
     );

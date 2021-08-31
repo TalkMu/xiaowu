@@ -33,10 +33,7 @@ class TabBarPageState extends State<TabBarPage> {
       return LoginPage();
     }
     return Scaffold(
-      body: IndexedStack(
-        index: _currentPage,
-        children: _pages,
-      ),
+      body: _pages[_currentPage],
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).push(new MaterialPageRoute(builder: (context) {

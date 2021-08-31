@@ -9,6 +9,7 @@ import 'package:flutter_baidu_mapapi_search/flutter_baidu_mapapi_search.dart';
 import 'package:lunar_calendar/lunar_calendar.dart';
 import 'package:xiaowu/entity/banner_entity.dart';
 import 'package:xiaowu/entity/category_entity.dart';
+import 'package:xiaowu/entity/news_entity.dart';
 import 'package:xiaowu/entity/weather_entity.dart';
 import 'package:xiaowu/model/WeatherModel.dart';
 import 'package:xiaowu/page/home/BannerSection.dart';
@@ -19,6 +20,7 @@ import 'package:xiaowu/service/service_url.dart';
 import 'package:xiaowu/util/BaseUtil.dart';
 
 import 'CategorySection.dart';
+import 'HotSection.dart';
 import 'WeatherSection.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,8 +33,7 @@ class HomePage extends StatefulWidget {
   }
 }
 
-class _HomePageState extends State<HomePage>
-    with AutomaticKeepAliveClientMixin {
+class _HomePageState extends State<HomePage>{
   HomeWeather weather;
   dynamic homeData;
   var _futureBuilderFuture;
@@ -40,11 +41,6 @@ class _HomePageState extends State<HomePage>
   _HomePageState(this.weather);
 
   String _districtValue = "110100";
-
-  @override
-  bool get wantKeepAlive {
-    return true;
-  }
 
   @override
   void initState() {
@@ -128,6 +124,11 @@ class _HomePageState extends State<HomePage>
                   height: ScreenUtil.getInstance().getHeight(14),
                 ),
                 RemindSection(),
+                SizedBox(
+                  height: ScreenUtil.getInstance().getHeight(20),
+                ),
+                HotSection((homeData["homeNewVOS"] as List).map((e) =>
+                    NewsEntity().fromJson(e)).toList()),
                 TextButton(
                     onPressed: () {
                       _getHomeData();

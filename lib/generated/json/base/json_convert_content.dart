@@ -9,6 +9,8 @@ import 'package:xiaowu/entity/weather_entity.dart';
 import 'package:xiaowu/generated/json/weather_entity_helper.dart';
 import 'package:xiaowu/entity/banner_entity.dart';
 import 'package:xiaowu/generated/json/banner_entity_helper.dart';
+import 'package:xiaowu/entity/news_entity.dart';
+import 'package:xiaowu/generated/json/news_entity_helper.dart';
 import 'package:xiaowu/entity/category_entity.dart';
 import 'package:xiaowu/generated/json/category_entity_helper.dart';
 import 'package:xiaowu/entity/user_entity.dart';
@@ -37,6 +39,8 @@ class JsonConvert<T> {
 				return weatherForecastsFromJson(data as WeatherForecasts, json) as T;
 			case BannerEntity:
 				return bannerEntityFromJson(data as BannerEntity, json) as T;
+			case NewsEntity:
+				return newsEntityFromJson(data as NewsEntity, json) as T;
 			case CategoryEntity:
 				return categoryEntityFromJson(data as CategoryEntity, json) as T;
 			case CategoryServerItemInfo:
@@ -64,6 +68,8 @@ class JsonConvert<T> {
 				return weatherForecastsToJson(data as WeatherForecasts);
 			case BannerEntity:
 				return bannerEntityToJson(data as BannerEntity);
+			case NewsEntity:
+				return newsEntityToJson(data as NewsEntity);
 			case CategoryEntity:
 				return categoryEntityToJson(data as CategoryEntity);
 			case CategoryServerItemInfo:
@@ -97,6 +103,9 @@ class JsonConvert<T> {
 		}
 		if(type == (BannerEntity).toString()){
 			return BannerEntity().fromJson(json);
+		}
+		if(type == (NewsEntity).toString()){
+			return NewsEntity().fromJson(json);
 		}
 		if(type == (CategoryEntity).toString()){
 			return CategoryEntity().fromJson(json);
@@ -136,6 +145,9 @@ class JsonConvert<T> {
 		}
 		if(<BannerEntity>[] is M){
 			return data.map<BannerEntity>((e) => BannerEntity().fromJson(e)).toList() as M;
+		}
+		if(<NewsEntity>[] is M){
+			return data.map<NewsEntity>((e) => NewsEntity().fromJson(e)).toList() as M;
 		}
 		if(<CategoryEntity>[] is M){
 			return data.map<CategoryEntity>((e) => CategoryEntity().fromJson(e)).toList() as M;
