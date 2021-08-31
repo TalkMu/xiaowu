@@ -63,18 +63,23 @@ class _RemindSectionState extends State<RemindSection> {
                   ),
                 ),
                 Container(
-                  child: Text(
-                    "更多>",
-                    style: TextStyle(
-                        fontSize: ScreenUtil.getInstance().getSp(12),
-                        fontWeight: FontWeight.w400,
-                        color: ColorUtil.fromHex("#161833")),
-                  ),
+                  child: InkWell(
+                    child: Text(
+                      "更多>",
+                      style: TextStyle(
+                          fontSize: ScreenUtil.getInstance().getSp(12),
+                          fontWeight: FontWeight.w400,
+                          color: ColorUtil.fromHex("#161833")),
+                    ),
+                    onTap: (){},
+                  )
                 )
               ],
             ),
           ),
-          Container(),
+          Container(
+            child: ListView(),
+          ),
         ],
       ),
     );
