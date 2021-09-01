@@ -7,6 +7,8 @@ import 'package:xiaowu/entity/remind_entity.dart';
 import 'package:xiaowu/generated/json/remind_entity_helper.dart';
 import 'package:xiaowu/entity/weather_entity.dart';
 import 'package:xiaowu/generated/json/weather_entity_helper.dart';
+import 'package:xiaowu/entity/news_detail_entity.dart';
+import 'package:xiaowu/generated/json/news_detail_entity_helper.dart';
 import 'package:xiaowu/entity/banner_entity.dart';
 import 'package:xiaowu/generated/json/banner_entity_helper.dart';
 import 'package:xiaowu/entity/news_entity.dart';
@@ -37,6 +39,8 @@ class JsonConvert<T> {
 				return weatherLocationFromJson(data as WeatherLocation, json) as T;
 			case WeatherForecasts:
 				return weatherForecastsFromJson(data as WeatherForecasts, json) as T;
+			case NewsDetailEntity:
+				return newsDetailEntityFromJson(data as NewsDetailEntity, json) as T;
 			case BannerEntity:
 				return bannerEntityFromJson(data as BannerEntity, json) as T;
 			case NewsEntity:
@@ -66,6 +70,8 @@ class JsonConvert<T> {
 				return weatherLocationToJson(data as WeatherLocation);
 			case WeatherForecasts:
 				return weatherForecastsToJson(data as WeatherForecasts);
+			case NewsDetailEntity:
+				return newsDetailEntityToJson(data as NewsDetailEntity);
 			case BannerEntity:
 				return bannerEntityToJson(data as BannerEntity);
 			case NewsEntity:
@@ -100,6 +106,9 @@ class JsonConvert<T> {
 		}
 		if(type == (WeatherForecasts).toString()){
 			return WeatherForecasts().fromJson(json);
+		}
+		if(type == (NewsDetailEntity).toString()){
+			return NewsDetailEntity().fromJson(json);
 		}
 		if(type == (BannerEntity).toString()){
 			return BannerEntity().fromJson(json);
@@ -142,6 +151,9 @@ class JsonConvert<T> {
 		}
 		if(<WeatherForecasts>[] is M){
 			return data.map<WeatherForecasts>((e) => WeatherForecasts().fromJson(e)).toList() as M;
+		}
+		if(<NewsDetailEntity>[] is M){
+			return data.map<NewsDetailEntity>((e) => NewsDetailEntity().fromJson(e)).toList() as M;
 		}
 		if(<BannerEntity>[] is M){
 			return data.map<BannerEntity>((e) => BannerEntity().fromJson(e)).toList() as M;

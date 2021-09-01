@@ -20,4 +20,5 @@ const servicePath = {
   "getVerificationCode": serviceUrl + "sendLoginVerificationCode",
   "verificationCodeLogin": serviceUrl + "verificationCodeLogin",
   "home": serviceUrl + "biz/index/home",
+  "newsDetail": serviceUrl + "biz/news/appDetail",
 };

@@ -2,6 +2,7 @@ import 'package:flustars/flustars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:xiaowu/entity/news_entity.dart';
+import 'package:xiaowu/page/home/NewsDetail.dart';
 import 'package:xiaowu/util/ColorUtil.dart';
 
 class HotSection extends StatefulWidget {
@@ -19,68 +20,90 @@ class _HotSectionState extends State<HotSection> {
   _HotSectionState(this.list);
 
   Widget createView(NewsEntity newsEntity) {
-    return Container(
-      margin: EdgeInsets.only(top: ScreenUtil.getInstance().getHeight(10)),
-      decoration: BoxDecoration(
-        color: Color.fromRGBO(255, 255, 255, 0.4),
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: Row(
-        children: [
-          Container(
-            margin: EdgeInsets.only(
-                left: ScreenUtil.getInstance().getWidth(16),
-                top: ScreenUtil.getInstance().getHeight(20)),
-            width: ScreenUtil.getInstance().getWidth(218),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  child: Text(
-                    newsEntity.title,
-                    style: TextStyle(
-                        color: ColorUtil.fromHex("#161833"),
-                        fontSize: ScreenUtil.getInstance().getSp(15),
-                        fontWeight: FontWeight.w400),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(
-                      top: ScreenUtil.getInstance().getHeight(20),
-                      bottom: ScreenUtil.getInstance().getHeight(20)),
-                  child: Text(
-                    "更新于" + newsEntity.createTimeStr,
-                    style: TextStyle(
-                        color: ColorUtil.fromHex("#94969E"),
-                        fontSize: ScreenUtil.getInstance().getSp(12),
-                        fontWeight: FontWeight.w400),
-                  ),
-                )
-              ],
-            ),
-          ),
-          Expanded(child: Container()),
-          newsEntity.mediaUrls.length > 0
-              ? Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  margin: EdgeInsets.only(
-                      right: ScreenUtil.getInstance().getWidth(10)),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(15),
-                    child: Image.network(
-                      newsEntity.mediaUrls.first,
-                      width: ScreenUtil.getInstance().getWidth(95),
-                      height: ScreenUtil.getInstance().getHeight(85),
-                      fit: BoxFit.cover,
+    return InkWell(
+      onTap: (){
+        Navigator.push(context,
+            new MaterialPageRoute(builder: (BuildContext context) {
+              return new NewsDetail(
+                newsId: newsEntity.id,
+              );
+              /// 跳转到第三页，并且传递参数过去
+            }));
+      },
+      child: Container(
+        margin: EdgeInsets.only(top: ScreenUtil.getInstance().getHeight(10)),
+        decoration: BoxDecoration(
+          color: Color.fromRGBO(255, 255, 255, 0.4),
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Row(
+          children: [
+            Container(
+              margin: EdgeInsets.only(
+                  left: ScreenUtil.getInstance().getWidth(16),
+                  top: ScreenUtil.getInstance().getHeight(20)),
+              width: ScreenUtil.getInstance().getWidth(218),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    child: Text(
+                      newsEntity.title,
+                      style: TextStyle(
+                          color: ColorUtil.fromHex("#161833"),
+                          fontSize: ScreenUtil.getInstance().getSp(15),
+                          fontWeight: FontWeight.w400),
                     ),
                   ),
-                )
-              : Container()
-        ],
+                  Container(
+                    margin: EdgeInsets.only(
+                        top: ScreenUtil.getInstance().getHeight(20),
+                        bottom: ScreenUtil.getInstance().getHeight(20)),
+                    child: Text(
+                      "更新于" + newsEntity.createTimeStr,
+                      style: TextStyle(
+                          color: ColorUtil.fromHex("#94969E"),
+                          fontSize: ScreenUtil.getInstance().getSp(12),
+                          fontWeight: FontWeight.w400),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Expanded(child: Container()),
+            newsEntity.mediaUrls.length > 0
+                ? Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    margin: EdgeInsets.only(
+                        right: ScreenUtil.getInstance().getWidth(10)),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: Image.network(
+                        newsEntity.mediaUrls.first,
+                        width: ScreenUtil.getInstance().getWidth(95),
+                        height: ScreenUtil.getInstance().getHeight(85),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  )
+                : Container()
+          ],
+        ),
       ),
     );
+  }
+
+  _showDetail(int newsId) {
+    Navigator.push(context,
+        new MaterialPageRoute(builder: (BuildContext context) {
+      return new NewsDetail(
+        newsId: newsId,
+      );
+
+      /// 跳转到第三页，并且传递参数过去
+    }));
   }
 
   @override
