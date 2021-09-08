@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:xiaowu/page/home/HomePage.dart';
-import 'package:xiaowu/page/home/NewsDetail.dart';
-import 'package:xiaowu/page/login/CheckPage.dart';
 import 'package:xiaowu/page/login/LoginPage.dart';
 import 'package:xiaowu/page/tab_bar/TabBarPage.dart';
-import 'package:xiaowu/test1.dart';
-import 'package:xiaowu/test2.dart';
 
 import 'common/Global.dart';
 

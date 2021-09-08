@@ -37,6 +37,7 @@ android {
         applicationId "com.koolss.www.xiaowu"
         minSdkVersion 19
         targetSdkVersion 30
+        multiDexEnabled true
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         manifestPlaceholders = [
@@ -62,4 +63,5 @@ flutter {
 dependencies {
     implementation 'com.amap.api:location:latest.integration'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.multidex:multidex:2.0.1'
 }
