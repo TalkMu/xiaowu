@@ -17,7 +17,6 @@ import 'package:xiaowu/common/Constants.dart';
 
 class Global {
   static BaiduLocation? _baiduLocation; // 定位结果
-  static StreamSubscription<Map<String, Object>>? _locationListener;
   static LocationFlutterPlugin _locationPlugin = new LocationFlutterPlugin();
 
   //初始化全局信息
@@ -41,15 +40,15 @@ class Global {
       LocationFlutterPlugin.setApiKey("ZePnrfC97Gvqn5OfH3KLONrtwkf7niAy");
       BMFMapSDK.setApiKeyAndCoordType("ZePnrfC97Gvqn5OfH3KLONrtwkf7niAy", BMF_COORD_TYPE.BD09LL);
     }
-    _locationListener =
-        _locationPlugin.onResultCallback().listen((Map<String, Object> result) {
+    _locationPlugin.onResultCallback().listen((Map<String, Object> result) {
           try {
             _baiduLocation =
                 BaiduLocation.fromMap(result);
             print("定位位置成功："+json.encode(_baiduLocation!.getMap()));
             SpUtil.putObject(Constants.CUR_LOCATION, _baiduLocation!.getMap());
           } catch (e) {
-            print(e);
+            String msg = e.toString();
+            LogUtil.e("定位异常：$msg");
           }
         });
     _startLocation();
@@ -108,16 +107,12 @@ class Global {
 
   /// 启动定位
   static void _startLocation() {
-    if (null != _locationPlugin) {
-      _setLocOption();
-      _locationPlugin.startLocation();
-    }
+    _setLocOption();
+    _locationPlugin.startLocation();
   }
 
   /// 停止定位
   static void _stopLocation() {
-    if (null != _locationPlugin) {
-      _locationPlugin.stopLocation();
-    }
+    _locationPlugin.stopLocation();
   }
 }
