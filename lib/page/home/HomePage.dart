@@ -10,6 +10,7 @@ import 'package:lunar_calendar/lunar_calendar.dart';
 import 'package:xiaowu/entity/banner_entity.dart';
 import 'package:xiaowu/entity/category_entity.dart';
 import 'package:xiaowu/entity/news_entity.dart';
+import 'package:xiaowu/entity/remind_entity.dart';
 import 'package:xiaowu/entity/weather_entity.dart';
 import 'package:xiaowu/model/WeatherModel.dart';
 import 'package:xiaowu/page/home/BannerSection.dart';
@@ -123,7 +124,8 @@ class _HomePageState extends State<HomePage>{
                 SizedBox(
                   height: ScreenUtil.getInstance().getHeight(14),
                 ),
-                RemindSection(),
+                RemindSection((homeData["homeMemos"] as List).map((e) =>
+                    RemindEntity().fromJson(e)).toList()),
                 SizedBox(
                   height: ScreenUtil.getInstance().getHeight(20),
                 ),

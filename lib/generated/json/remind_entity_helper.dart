@@ -1,26 +1,38 @@
 import 'package:xiaowu/entity/remind_entity.dart';
 
 remindEntityFromJson(RemindEntity data, Map<String, dynamic> json) {
-	if (json['remindType'] != null) {
-		data.remindType = json['remindType'].toString();
+	if (json['id'] != null) {
+		data.id = json['id'] is String
+				? int.tryParse(json['id'])
+				: json['id'].toInt();
 	}
-	if (json['remindContent'] != null) {
-		data.remindContent = json['remindContent'].toString();
+	if (json['serviceType'] != null) {
+		data.serviceType = json['serviceType'];
 	}
-	if (json['url'] != null) {
-		data.url = json['url'].toString();
+	if (json['period'] != null) {
+		data.period = json['period'].toString();
 	}
-	if (json['remindInfoUrl'] != null) {
-		data.remindInfoUrl = json['remindInfoUrl'].toString();
+	if (json['time'] != null) {
+		data.time = json['time'].toString();
+	}
+	if (json['timestamp'] != null) {
+		data.timestamp = json['timestamp'] is String
+				? int.tryParse(json['timestamp'])
+				: json['timestamp'].toInt();
+	}
+	if (json['description'] != null) {
+		data.description = json['description'].toString();
 	}
 	return data;
 }
 
 Map<String, dynamic> remindEntityToJson(RemindEntity entity) {
 	final Map<String, dynamic> data = new Map<String, dynamic>();
-	data['remindType'] = entity.remindType;
-	data['remindContent'] = entity.remindContent;
-	data['url'] = entity.url;
-	data['remindInfoUrl'] = entity.remindInfoUrl;
+	data['id'] = entity.id;
+	data['serviceType'] = entity.serviceType;
+	data['period'] = entity.period;
+	data['time'] = entity.time;
+	data['timestamp'] = entity.timestamp;
+	data['description'] = entity.description;
 	return data;
 }
