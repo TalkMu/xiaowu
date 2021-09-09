@@ -80,8 +80,9 @@ class _RemindSectionState extends State<RemindSection> {
             ),
           ),
           Container(
+            width: double.maxFinite,
             margin: EdgeInsets.only(top: ScreenUtil.getInstance().getAdapterSize(12)),
-            child: SingleChildScrollView(
+            child: list.isEmpty?emptyView():SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Wrap(
                 spacing: 10,
