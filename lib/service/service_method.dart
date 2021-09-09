@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flustars/flustars.dart';
+import 'package:flutter/material.dart';
+import 'package:xiaowu/common/Global.dart';
 import 'package:xiaowu/service/service_url.dart';
 import 'package:xiaowu/util/BaseUtil.dart';
 
@@ -15,7 +17,9 @@ Future request(url, {params,data,method="POST",contentType=Headers.jsonContentTy
     headers: {"Authorization":BaseUtil.getToken()}
   );
   Response response = await Dio().request(url,queryParameters: params,data: (contentType == Headers.formUrlEncodedContentType)?FormData.fromMap(data):data,options: options);
-  if(response.statusCode == 200){
+  if(response.data["code"] == 401){
+    Global.navigatorKey.currentState?.pushNamedAndRemoveUntil("login",ModalRoute.withName("/"));
+  }else if(response.statusCode == 200){
     var data = response.data;
     LogUtil.v("响应结果：$data");
     return data;
@@ -34,7 +38,9 @@ Future noTokenRequest(url, {params,data,method="POST",contentType=Headers
       sendTimeout: 5000,
   );
   Response response = await Dio().request(url,queryParameters: params,data: (contentType == Headers.formUrlEncodedContentType)?FormData.fromMap(data):data,options: options);
-  if(response.statusCode == 200){
+  if(response.data["code"] == 401){
+    Global.navigatorKey.currentState?.pushNamedAndRemoveUntil("login", ModalRoute.withName("/"));
+  }else if(response.statusCode == 200){
     var data = response.data;
     LogUtil.v("响应结果：$data");
     return data;

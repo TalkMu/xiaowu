@@ -34,7 +34,7 @@ class HomePage extends StatefulWidget {
   }
 }
 
-class _HomePageState extends State<HomePage>{
+class _HomePageState extends State<HomePage> {
   HomeWeather weather;
   dynamic homeData;
   var _futureBuilderFuture;
@@ -84,9 +84,8 @@ class _HomePageState extends State<HomePage>{
   Widget _buildFuture(BuildContext context, AsyncSnapshot snapshot) {
     // 请求已结束
     if (snapshot.connectionState == ConnectionState.done) {
-      if (snapshot.hasError) {
-        // 请求失败，显示错误
-        return Text("Error: ${snapshot.error}");
+      if (snapshot.hasError || snapshot.data == null) {
+        return Container();
       } else {
         // 请求成功，显示数据
         homeData = snapshot.data["data"];
@@ -119,18 +118,21 @@ class _HomePageState extends State<HomePage>{
                 SizedBox(
                   height: ScreenUtil.getInstance().getHeight(12),
                 ),
-                BannerSection((homeData["banners"] as List).map((e) =>
-                    BannerEntity().fromJson(e)).toList()),
+                BannerSection((homeData["banners"] as List)
+                    .map((e) => BannerEntity().fromJson(e))
+                    .toList()),
                 SizedBox(
                   height: ScreenUtil.getInstance().getHeight(14),
                 ),
-                RemindSection((homeData["homeMemos"] as List).map((e) =>
-                    RemindEntity().fromJson(e)).toList()),
+                RemindSection((homeData["homeMemos"] as List)
+                    .map((e) => RemindEntity().fromJson(e))
+                    .toList()),
                 SizedBox(
                   height: ScreenUtil.getInstance().getHeight(20),
                 ),
-                HotSection((homeData["homeNewVOS"] as List).map((e) =>
-                    NewsEntity().fromJson(e)).toList()),
+                HotSection((homeData["homeNewVOS"] as List)
+                    .map((e) => NewsEntity().fromJson(e))
+                    .toList()),
                 TextButton(
                     onPressed: () {
                       _getHomeData();
@@ -210,11 +212,11 @@ class _HomePageState extends State<HomePage>{
   }
 
   Future _getHomeData() async {
-    return await request(servicePath["home"],method: "GET", contentType:
-    Headers.formUrlEncodedContentType);
+    return await request(servicePath["home"],
+        method: "GET", contentType: Headers.formUrlEncodedContentType);
   }
 
-  Future _getAPis(){
+  Future _getAPis() {
     return _getHomeData();
   }
 }

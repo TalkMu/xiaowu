@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:xiaowu/page/home/HomePage.dart';
+import 'package:xiaowu/page/login/CheckPage.dart';
 import 'package:xiaowu/page/login/LoginPage.dart';
 import 'package:xiaowu/page/tab_bar/TabBarPage.dart';
 
@@ -17,8 +18,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: Global.navigatorKey,
       title: "小五管家Plus",
-      initialRoute:"test1", // 名为"/"的路由作为应用的home(首页)
+      initialRoute:"/", // 名为"/"的路由作为应用的home(首页)
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.green,
@@ -28,6 +30,7 @@ class MyApp extends StatelessWidget {
         "/":(context)=>TabBarPage(),
         "home":(context)=>HomePage(),
         "login":(context)=>LoginPage(),
+        "loginCheck":(context,{arguments}) =>CheckPage(arguments),
       },
     );
   }

@@ -3,6 +3,7 @@ import 'package:flustars/flustars.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:xiaowu/common/Constants.dart';
 import 'package:xiaowu/entity/user_entity.dart';
 import 'package:xiaowu/page/login/CheckPage.dart';
@@ -300,18 +301,20 @@ class _LoginPageState extends State<LoginPage> {
   void _getVerificationCode() {
     var phone = this.phoneController.text;
     var param = {"phone": phone};
-    request(servicePath["getVerificationCode"],
+    Navigator.pushNamed(context, "loginCheck",
+        arguments: param);
+    /*request(servicePath["getVerificationCode"],
             data: param, contentType: Headers.formUrlEncodedContentType)
         .then(
       (data) {
         if (data["code"] == 200) {
-          Navigator.of(context).pushNamed("loginCheck", arguments:
-          {"phone":phone});
+          Navigator.pushNamed(context, "loginCheck",
+              arguments: {"phone": phone});
         } else {
-          print("获取验证码失败");
+          EasyLoading.showToast(data["msg"]);
         }
       },
-    );
+    );*/
   }
 
   void _weiXinLogin() {

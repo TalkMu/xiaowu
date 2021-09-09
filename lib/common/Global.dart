@@ -16,6 +16,7 @@ import 'package:sp_util/sp_util.dart';
 import 'package:xiaowu/common/Constants.dart';
 
 class Global {
+  static GlobalKey<NavigatorState> navigatorKey = GlobalKey();
   static BaiduLocation? _baiduLocation; // 定位结果
   static LocationFlutterPlugin _locationPlugin = new LocationFlutterPlugin();
 
