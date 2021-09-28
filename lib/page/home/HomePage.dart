@@ -43,15 +43,19 @@ class _HomePageState extends State<HomePage> {
 
   String _districtValue = "110100";
 
-  @override
-  void initState() {
-    print("initState");
+  void initData() async{
     var location = BaseUtil.getLocation();
     if (location != null && location.address != null) {
       setState(() {
         _districtValue = location.address.split("=")[1].split("|")[0].trim();
       });
     }
+  }
+
+  @override
+  void initState() {
+    print("initState");
+    initData();
     _getWeather();
     _futureBuilderFuture = _getAPis();
     super.initState();

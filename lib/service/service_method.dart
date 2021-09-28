@@ -21,7 +21,7 @@ Future request(url, {params,data,method="POST",contentType=Headers.jsonContentTy
     Global.navigatorKey.currentState?.pushNamedAndRemoveUntil("login",ModalRoute.withName("/"));
   }else if(response.statusCode == 200){
     var data = response.data;
-    LogUtil.v("响应结果：$data");
+//    LogUtil.v("响应结果：$data");
     return data;
   }else{
     throw new Exception("服务器异常");
@@ -42,7 +42,7 @@ Future noTokenRequest(url, {params,data,method="POST",contentType=Headers
     Global.navigatorKey.currentState?.pushNamedAndRemoveUntil("login", ModalRoute.withName("/"));
   }else if(response.statusCode == 200){
     var data = response.data;
-    LogUtil.v("响应结果：$data");
+//    LogUtil.v("响应结果：$data");
     return data;
   }else{
     throw new Exception("服务器异常");
