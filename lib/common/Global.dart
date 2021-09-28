@@ -52,7 +52,7 @@ class Global {
             LogUtil.e("定位异常：$msg");
           }
         });
-    //_startLocation();
+    _startLocation();
   }
 
   static void configLoading() {
