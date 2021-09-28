@@ -20,16 +20,19 @@ class _BannerSectionState extends State<BannerSection> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 28,right: 28),
-      height: ScreenUtil.getInstance().getHeight(118),
+      margin: EdgeInsets.only(left: 28, right: 28),
+      height: ScreenUtil.getInstance().getHeight(120),
       child: Swiper(
         itemCount: list.length,
-        itemBuilder: (context,index){
-          return Image.network(list[index].url,fit: BoxFit.fitWidth,);
+        itemBuilder: (context, index) {
+          return Image.network(
+            list[index].url,
+            fit: BoxFit.fitWidth,
+          );
         },
         pagination: SwiperPagination(
-          //margin: EdgeInsets.only(bottom: 0)
-        ),
+            //margin: EdgeInsets.only(bottom: 0)
+            ),
         control: SwiperControl(),
       ),
     );

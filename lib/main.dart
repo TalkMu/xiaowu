@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         "/":(context)=>TabBarPage(),
         "home":(context)=>HomePage(),
         "login":(context)=>LoginPage(),
-        "loginCheck":(context,{arguments}) =>CheckPage(arguments),
+        "loginCheck":(context) =>CheckPage(),
       },
     );
   }

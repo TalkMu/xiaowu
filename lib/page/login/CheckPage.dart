@@ -13,20 +13,14 @@ import 'package:xiaowu/util/ColorUtil.dart';
 import 'package:flutter_verification_box/verification_box.dart';
 
 class CheckPage extends StatefulWidget {
-  Map arguments;
-
-  CheckPage(this.arguments);
-
   @override
   State createState() {
-    return new _CheckPage(this.arguments);
+    return new _CheckPage();
   }
 }
 
 class _CheckPage extends State<CheckPage> {
-  Map arguments;
-
-  _CheckPage(this.arguments);
+  var arguments;
 
   // 秒数
   int _seconds = 60;
@@ -40,6 +34,7 @@ class _CheckPage extends State<CheckPage> {
 
   @override
   Widget build(BuildContext context) {
+    arguments = ModalRoute.of(context)!.settings.arguments;
     var phone=this.arguments["phone"];
     if (!hasStartTimer) {
       this.hasStartTimer = true;
@@ -178,7 +173,7 @@ class _CheckPage extends State<CheckPage> {
       if(data["code"]==200){
         var user = UserEntity().fromJson(data["data"]);
         SpUtil.putObject(Constants.LOGIN_DATA_KEY, user);
-        Navigator.pushNamed(context, "home");
+        Navigator.pushNamed(context, "/");
       }
     });
   }
